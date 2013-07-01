@@ -1,0 +1,3 @@
+
+class ShopifyException(Exception):
+    pass
