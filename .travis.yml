@@ -1,0 +1,17 @@
+language: python
+
+python:
+  - "2.7"
+  - "3.3"
+  - "pypy"
+
+install:
+  - pip install . --quiet
+  - pip install install git+https://github.com/kennethreitz/requests
+  - pip install pytest nose --quiet
+
+script: nosetests
+
+branches:
+  only:
+    - master
