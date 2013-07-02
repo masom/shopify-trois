@@ -7,7 +7,7 @@ python:
 
 install:
   - pip install . --quiet
-  - pip install install git+https://github.com/kennethreitz/requests
+  - pip install git+https://github.com/kennethreitz/requests
   - pip install pytest nose --quiet
 
 script: nosetests
