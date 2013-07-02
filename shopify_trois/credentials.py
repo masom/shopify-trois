@@ -8,12 +8,9 @@
     :license: MIT, see LICENSE for more details.
 """
 class Credentials:
-    def __init__(self, api_key = "", scope = ""):
+    def __init__(self, api_key = "", secret = "", scope = "", code = "", oauth_access_token = None):
         self.api_key = api_key
+        self.secret= secret
         self.scope = scope
-
-        self.oauth_token = None
-        self.oauth_secret = None
-
-        self.consumer_token = None
-        self.consumer_secret = None
+        self.code = code
+        self.oauth_access_token = oauth_access_token

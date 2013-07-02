@@ -2,9 +2,11 @@ from ... import ShopifyTroisTestCase
 
 from shopify_trois.exceptions import ShopifyException
 
-from shopify_trois import Shopify, Shop, Credentials
+from shopify_trois import Shop, Credentials
 
 from shopify_trois.engines.http.oauth_engine import OAuthEngine
+
+from shopify_trois.engines.http.request import Request
 
 class OAuthEngineTestCase(ShopifyTroisTestCase):
 
@@ -12,63 +14,99 @@ class OAuthEngineTestCase(ShopifyTroisTestCase):
         expected = "https://{shop_name}.myshopify.com/admin"
         self.assertEqual(OAuthEngine._api_base, expected)
 
-        expected = "{base_url}/admin/oauth/authorize"
+        expected = "{base_url}/oauth/authorize"
         self.assertEqual(OAuthEngine._authorize_url, expected)
 
         self.assertEqual(OAuthEngine.extension, "")
         self.assertEqual(OAuthEngine.mime, "")
 
-    def test_init(self):
+    def test_oauth_authorize_url(self):
 
-        # __init__ should fail when a shopify instance is not passed.
+        shop = Shop(name = 'test')
+        credentials = Credentials()
+        shopify = OAuthEngine(shop = shop, credentials = credentials)
+
+        # Should bail if not scopes are provided.
         try:
-            engine = OAuthEngine(None)
+            url = shopify.oauth_authorize_url(redirect_to = 'http://localhost/installed')
             self.fail()
-        except AttributeError:
-            pass
-
-        # __init__ should fail when the shop or credentials were not passed.
-        shopify = Shopify(engine = None)
-        try:
-            shopify.start_engine(OAuthEngine)
         except ShopifyException:
             pass
 
-        shop = Shop(name = 'test')
-        shopify = Shopify(engine = None, shop = shop)
-        try:
-            shopify.start_engine(OAuthEngine)
-        except ShopifyException:
-            pass
+        credentials.scope = ['yup']
+        url = shopify.oauth_authorize_url(redirect_to = 'http://localhost/installed')
+        expected = "https://test.myshopify.com/admin/oauth/authorize?client_id=&scope=yup&redirect_to=http%3A%2F%2Flocalhost%2Finstalled"
+        self.assertEquals(url, expected)
 
-
-        credentials = Credentials()
-        shopify = Shopify(engine = None, shop = shop, credentials = credentials)
-        try:
-            shopify.start_engine(OAuthEngine)
-        except ShopifyException:
-            pass
-
-    def test_authorize(self):
-        shop = Shop(name = 'test')
-        credentials = Credentials()
-        shopify = Shopify(shop = shop, credentials = credentials)
-
-        url = shopify.engine.authorize_url()
-        expected = "https://test.myshopify.com/admin/admin/oauth/authorize?client_id=&scope="
+        url = shopify.oauth_authorize_url()
+        expected = "https://test.myshopify.com/admin/oauth/authorize?client_id=&scope=yup"
         self.assertEquals(url, expected)
 
         api_key = "2e6fff2c-e28d-11e2-b6bf-4061860bdbf3"
         credentials.api_key = api_key
 
-        url = shopify.engine.authorize_url()
-        expected = "https://test.myshopify.com/admin/admin/oauth/authorize?client_id={api_key}&scope=".format(api_key = api_key)
+        url = shopify.oauth_authorize_url()
+        expected = "https://test.myshopify.com/admin/oauth/authorize?client_id={api_key}&scope=yup".format(api_key = api_key)
         self.assertEquals(url, expected)
 
         credentials.scope = ["fun", "things", "to", "scope", "W$%3'#"]
-        url = shopify.engine.authorize_url()
-        expected = "https://test.myshopify.com/admin/admin/oauth/authorize?client_id=2e6fff2c-e28d-11e2-b6bf-4061860bdbf3&scope=fun%2Cthings%2Cto%2Cscope%2CW%24%253%27%23"
+        url = shopify.oauth_authorize_url()
+        expected = "https://test.myshopify.com/admin/oauth/authorize?client_id=2e6fff2c-e28d-11e2-b6bf-4061860bdbf3&scope=fun%2Cthings%2Cto%2Cscope%2CW%24%253%27%23"
         self.assertEquals(url, expected)
 
-    def test_request(self):
-        pass
+    def test_oauth_access_token_url(self):
+
+        shop = Shop(name = 'test')
+        credentials = Credentials()
+        shopify = OAuthEngine(shop = shop, credentials = credentials)
+
+        expected = "https://test.myshopify.com/admin/oauth/access_token?client_id=&client_secret=&code="
+        url =  shopify.oauth_access_token_url()
+        self.assertEqual(url, expected)
+
+        credentials.api_key = api_key = "2e6fff2c-e28d-11e2-b6bf-4061860bdbf3"
+        credentials.secret = secret = "mmmmsecret"
+        credentials.code = code = "loremipsum"
+
+        expected = "https://test.myshopify.com/admin/oauth/access_token?client_id={api_key}&client_secret={secret}&code={code}".format(api_key=api_key, secret=secret, code=code)
+        url =  shopify.oauth_access_token_url()
+        self.assertEqual(url, expected)
+
+    def test_prepare_request(self):
+        shop = Shop(name = 'test')
+        credentials = Credentials()
+        shopify = OAuthEngine(shop = shop, credentials = credentials)
+
+        request = Request()
+        shopify._prepare_request(request)
+        expected = {
+            "X-Shopify-Access-Token": None,
+            "Content-Type": ""
+        }
+        self.assertEquals(request.headers(), expected)
+
+        request = Request()
+        shopify._prepare_request(request, use_access_token = False)
+        expected = {
+            "Content-Type": ""
+        }
+        self.assertEquals(request.headers(), expected)
+
+    def test_url_for_request(self):
+        shop = Shop(name = 'test')
+        credentials = Credentials()
+        shopify = OAuthEngine(shop = shop, credentials = credentials)
+
+        request = Request()
+        request.resource = "test"
+        url = shopify.url_for_request(request)
+        # Note: the base request class does not have an extension.
+        expected = "https://test.myshopify.com/admin/test."
+        self.assertEquals(url, expected)
+
+        request.resource = "test/mmmm food"
+        url = shopify.url_for_request(request)
+        # Note: The url generated by url_for_request are not escaped. The
+        # actual request.{method} will escape the url for us.
+        expected = "https://test.myshopify.com/admin/test/mmmm food."
+        self.assertEquals(url, expected)

@@ -8,9 +8,7 @@
     :license: MIT, see LICENSE for more details.
 """
 
-"""
-if shopify.shop is None:
-"""
+ERR_MISSING_SCOPE = "At least 1 scope must be provided."
 
 from collections import OrderedDict
 
@@ -18,12 +16,17 @@ from shopify_trois.exceptions import ShopifyException
 
 from requests.models import PreparedRequest
 
-class OAuthEngine:
+class OAuthEngine():
+
+    ERR_SHOP_NOT_SET = "The shopify instance does not yet know about the shop it is bound to."
+    ERR_CREDENTIALS_NOT_SET = "The shopify instance does not yet know about the shop credentials."
+
     """The api base url."""
     _api_base = "https://{shop_name}.myshopify.com/admin"
 
     """The oauth authorize url."""
-    _authorize_url = "{base_url}/admin/oauth/authorize"
+    _authorize_url = "{base_url}/oauth/authorize"
+    _access_token_url = "{base_url}/oauth/access_token"
 
     """The request extension."""
     extension = ''
@@ -31,26 +34,107 @@ class OAuthEngine:
     """The request mime type."""
     mime = ''
 
-    def __init__(self, shopify):
+    def __init__(self, shop, credentials):
+        self.credentials = credentials
+        self.shop = shop
+
         # Validate the shopify instance configuration before proceeding.
-        shopify.validate_config()
+        self.validate_config()
 
-        self.shopify = shopify
-        self.base_url = self._api_base.format(shop_name=shopify.shop.name)
+        self.base_url = self._api_base.format(shop_name=shop.name)
 
-    def authorize_url(self):
-        """Generates the oauth authorize url."""
+    def validate_config(self):
+        if self.shop is None:
+            raise ShopifyException(ERR_SHOP_NOT_SET)
+
+        if self.credentials is None:
+            raise ShopifyException(ERR_CREDENTIALS_NOT_SET)
+
+    def oauth_authorize_url(self, redirect_to = None):
+        """Generates the oauth authorize url.
+
+        redirect_to string URL shopify will redirect to once authorized.
+        """
+
+        if not self.credentials.scope:
+            raise ShopifyException(ERR_MISSING_SCOPE)
 
         url = self._authorize_url.format(base_url = self.base_url)
 
         params = [
-            ('client_id', self.shopify.credentials.api_key)
-            ,('scope', ",".join(self.shopify.credentials.scope))
+            ('client_id', self.credentials.api_key)
+            ,('scope', ",".join(self.credentials.scope))
+            ,('redirect_to', redirect_to)
         ]
 
         request = PreparedRequest()
         request.prepare_url(url=url, params=params)
         return request.url
 
-    def __request(self, request):
-        """Perform a request to Shopify"""
+    def oauth_access_token_url(self):
+        url = self._access_token_url.format(base_url = self.base_url)
+
+        params = [
+            ('client_id', self.credentials.api_key)
+            ,('client_secret', self.credentials.secret)
+            ,('code', self.credentials.code)
+        ]
+
+        parser = PreparedRequest()
+        parser.prepare_url(url = url, params = params)
+        return parser.url
+
+    def url_for_request(self, req):
+
+        url = "{api_base}/{resource}.{extension}".format(
+            api_base = self.base_url
+            , resource = req.resource
+            , extension = self.extension
+        )
+
+        return url
+
+    def _prepare_request(self, req, use_access_token = True):
+        if use_access_token:
+            req.headers(
+                'X-Shopify-Access-Token',
+                self.credentials.oauth_access_token
+            )
+
+        req.headers('Content-Type', self.mime)
+
+    def put(self, req):
+        """Perform a PUT request to Shopify."""
+
+        self._prepare_request(req)
+        url = self.url_for_request(req)
+        request = requests.put(
+            url,
+            params = req.params,
+            data=req.data,
+            headers = req.headers()
+        )
+
+        return request
+
+    def get(self, req):
+        """Perform a GET request to Shopify."""
+
+        self._prepare_request(req)
+        url = self.url_for_request(req)
+        request = requests.get(url, params = req.params, headers = req.headers())
+        return request
+
+    def post(self, req):
+        """Perform a POST request to Shopify"""
+
+        self._prepare_request(req)
+        url = self.url_for_request(req)
+        request = requests.post(
+            url,
+            params = req.params,
+            data=req.data,
+            headers = req.headers()
+        )
+
+        return request
