@@ -12,6 +12,3 @@ from .model import Model
 
 class Shop(Model):
     resource = "shops"
-
-    def __init__(self, name):
-        self.name = name

@@ -8,13 +8,50 @@
     :license: MIT, see LICENSE for more details.
 """
 
+class Meta():
+    def __init__(self):
+        self.exists = False
+
 '''
 Base model class for all Shopify resources.
 '''
-class Model:
+class Model():
     """Resource name.
     Maps to a database table name, URL resource name, etc.
     """
     resource = ''
 
     primary_key = "id"
+
+    def __init__(self, *args, **kwargs):
+
+        for k,v in kwargs.items():
+            setattr(self, k, v)
+
+        original_state = dict(self.__dict__)
+
+        self._meta__ = Meta()
+        self._meta__.original_state = original_state
+
+        if hasattr(self, self.primary_key):
+            self._meta__.exists = True
+
+    def exists(self):
+        return self._meta__.exists
+
+    def to_dict(self):
+        data = dict(self.__dict__)
+        del(data['_meta__'])
+        return data
+
+    def changes(self):
+        missing = object()
+        result = {}
+        for key, original in self._meta__.original_state.items():
+            current = self.__dict__.get(key, missing)
+            if current == missing:
+                continue
+
+            if original != current:
+                result[key] = current
+        return result
