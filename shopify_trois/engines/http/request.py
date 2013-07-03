@@ -9,6 +9,7 @@
 """
 
 from .mapping import mapping as ResourceMapping
+from shopify_trois.models.model import Model
 
 class Request:
 
@@ -25,15 +26,10 @@ class Request:
         '''
         self.resource = None
 
-        self.result = None
-
         self.data = None
 
-        if model is object:
+        if model:
             self.resource = self.generate_resource_for_model(model)
-
-    def data(self):
-        raise NotImplemented()
 
     def headers(self, key = None, value = None):
         if key is None:
@@ -41,15 +37,18 @@ class Request:
         else:
             self.__headers[key] = value
 
-    '''
-    Generate the relative path of a given model.
-    '''
-    @classmethod
-    def generate_resource_for_model(cls, model):
+    def generate_resource_for_model(self, model):
+        '''Generate the relative path of a given model.'''
 
         """The ResourceMapping dict contains model resources mapping to
         a different name on the Shopify API.
         """
-
         resource = ResourceMapping.get(model.resource, model.resource)
+
+        if isinstance(model, Model):
+            return "/{resource}/{id}".format(
+                resource= resource
+                ,id = getattr(model, model.primary_key)
+            )
+
         return "/%s" % resource

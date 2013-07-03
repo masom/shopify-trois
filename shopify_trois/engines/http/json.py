@@ -21,22 +21,29 @@ class Json(OAuthEngine):
         super().__init__(shop = shop, credentials = credentials)
 
 
-    def add(self, model, data):
-        request = Request(model)
-        request.data = json.dumps(data)
+    def add(self, instance, fields):
+        req = Request(instance)
+        req.data = json.dumps(instance.to_dict())
         return self.post(req)
 
-    def remove(self, model, primary_key):
-        request = Request(model)
+    def remove(self, instance):
+        req = Request(instance)
         return self.delete(req)
 
-    def update(self, model, data):
-        request = Request(model)
-        request.data = json.dumps(data)
+    def update(self, instance, fields):
+        req = Request(instance)
+        req.data = json.dumps(instance.to_dict())
         return self.post(req)
 
-    def index(self, model):
-        pass
+    def find_by_id(self, Model, primary_key):
+        req = Request(model)
+        req.resource += "/{primary_key}".format(primary_key=primary_key)
+        return self.get(req)
+
+    def index(self, model, **params):
+        req = Request(model)
+        req.params = params
+        return self.get(req)
 
     def authorize_app_url(self):
         return self.oauth_authorize_url()
