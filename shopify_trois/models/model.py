@@ -21,7 +21,17 @@ class Model():
     """
     resource = ''
 
+    """The model primary key."""
     primary_key = "id"
+
+    """Mark the model as being a subresource of another."""
+    is_subresource_of = None
+
+    """List of supported actions on the resource."""
+    supported = []
+
+    """List of properties expoded by the api."""
+    properties = []
 
     def __init__(self, *args, **kwargs):
 
