@@ -10,20 +10,21 @@
 
 from .model import Model
 
+
 class Customer(Model):
     """Customer
     http://docs.shopify.com/api/customer
     """
 
-    resource="customers"
+    resource = "customers"
 
     supported = [
         "count", "create", "delete", "index", "search", "update", "view"
     ]
 
     properties = [
-        "accepts_marketing", "created_at", "email", "first_name", "id"
-        ,"last_name", "last_order_id", "muiltipass_identifier", "note"
-        ,"order_count", "state", "total_spent", "updated_at", "verified_email"
-        ,"tags", "last_order_name", "default_address", "addresses"
+        "accepts_marketing", "created_at", "email", "first_name", "id",
+        "last_name", "last_order_id", "muiltipass_identifier", "note",
+        "order_count", "state", "total_spent", "updated_at", "verified_email",
+        "tags", "last_order_name", "default_address", "addresses"
     ]

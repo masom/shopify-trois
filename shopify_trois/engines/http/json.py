@@ -14,12 +14,13 @@ from shopify_trois.engines.http.oauth_engine import OAuthEngine
 from shopify_trois.engines.http.request import Request
 from shopify_trois.exceptions import *
 
+
 class Json(OAuthEngine):
     extension = 'json'
     mime = 'application/json; charset=utf-8'
 
-    def __init__(self, shop_name, credentials, ignore_supported = False,
-            ignore_model_properties = False):
+    def __init__(self, shop_name, credentials, ignore_supported=False,
+                 ignore_model_properties=False):
         """Initialize the Json engine.
 
         :param shop_name: The name of the shopify store.
@@ -31,7 +32,7 @@ class Json(OAuthEngine):
                                         models when persisting them.
         """
 
-        super().__init__(shop_name = shop_name, credentials = credentials)
+        super().__init__(shop_name=shop_name, credentials=credentials)
 
         #: When set to True, ignore checking for supported actions on models.
         self.ignore_supported = ignore_supported
@@ -50,7 +51,7 @@ class Json(OAuthEngine):
 
         enclosure = instance.__class__.__name__.lower()
 
-        req.data = json.dumps({ enclosure: instance.to_dict()})
+        req.data = json.dumps({enclosure: instance.to_dict()})
 
         res = self.post(req)
 
@@ -82,7 +83,7 @@ class Json(OAuthEngine):
 
         raise ShopifyException(res)
 
-    def update(self, instance, whitelist = None):
+    def update(self, instance, whitelist=None):
         """Update a model instance.
 
         An InvalidRequestException will be raised if the instance has not been
@@ -170,9 +171,9 @@ class Json(OAuthEngine):
         """
 
         url = self.oauth_access_token_url()
-        headers = { "Content-Type": self.mime }
+        headers = {"Content-Type": self.mime}
 
-        r = requests.post(url, headers = headers)
+        r = requests.post(url, headers=headers)
 
         if r.status_code == requests.codes.ok:
             data = r.json()
@@ -203,4 +204,3 @@ class Json(OAuthEngine):
             model_name = model.__class__.__name__
 
         raise InvalidRequestException(msg % (method, model_name))
-

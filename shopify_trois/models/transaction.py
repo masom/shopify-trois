@@ -11,6 +11,7 @@
 from .model import Model
 from .order import Order
 
+
 class Transaction(Model):
     """Transaction
     http://docs.shopify.com/api/transactions
@@ -23,6 +24,6 @@ class Transaction(Model):
 
     properties = [
         "amount", "authorization", "created_at", "gateway", "id", "kind",
-        "location_id", "message", "order_id", "status", "user_id", "device_id"
-        ,"test", "receipt"
+        "location_id", "message", "order_id", "status", "user_id", "device_id",
+        "test", "receipt"
     ]

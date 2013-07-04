@@ -10,12 +10,13 @@
 
 from .model import Model
 
+
 class CustomerGroup(Model):
     """CustomerGroup
     http://docs.shopify.com/api/customergroup
     """
 
-    resource="customer_groups"
+    resource = "customer_groups"
 
     supported = [
         "create", "delete", "index", "/customers", "update", "view"

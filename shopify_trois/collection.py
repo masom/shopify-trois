@@ -8,10 +8,12 @@
     :license: MIT, see LICENSE for more details.
 """
 
+
 class Collection():
     def __init__(self, model, data):
         """Initialize a new collection for the given model and associated data.
         """
+
         self.model = model
 
         if not self.model.resource in data:
@@ -23,7 +25,6 @@ class Collection():
             raise TypeError(msg % self.model.resource)
 
         self.data = data[self.model.resource]
-
 
     def __iter__(self):
         """Iterates the data array yielding a model instance."""

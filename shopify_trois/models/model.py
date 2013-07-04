@@ -8,14 +8,15 @@
     :license: MIT, see LICENSE for more details.
 """
 
+
 class Meta():
     def __init__(self):
         self.exists = False
 
-'''
-Base model class for all Shopify resources.
-'''
+
 class Model():
+    """Base model class for all Shopify resources."""
+
     """Resource name.
     Maps to a database table name, URL resource name, etc.
     """
@@ -35,7 +36,7 @@ class Model():
 
     def __init__(self, *args, **kwargs):
 
-        for k,v in kwargs.items():
+        for k, v in kwargs.items():
             setattr(self, k, v)
 
         original_state = dict(self.__dict__)

@@ -10,13 +10,13 @@
 
 from .model import Model
 
+
 class Webhook(Model):
     """ Webhook
     http://docs.shopify.com/api/webhook
     """
 
     resource = "webhooks"
-
 
     supported = ["index", "count", "view", "create", "update", "delete"]
 

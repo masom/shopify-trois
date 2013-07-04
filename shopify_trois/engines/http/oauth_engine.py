@@ -15,9 +15,11 @@ from shopify_trois.exceptions import ShopifyException
 import requests
 from requests.models import PreparedRequest
 
+
 class OAuthEngine():
 
-    ERR_CREDENTIALS_NOT_SET = "The shopify instance does not yet know about the shop credentials."
+    ERR_CREDENTIALS_NOT_SET = "The shopify instance does not yet know about" \
+                              " the shop credentials."
 
     """The api base url."""
     _api_base = "https://{shop_name}.myshopify.com/admin"
@@ -44,18 +46,18 @@ class OAuthEngine():
         if self.credentials is None:
             raise ShopifyException(ERR_CREDENTIALS_NOT_SET)
 
-    def oauth_authorize_url(self, redirect_to = None):
+    def oauth_authorize_url(self, redirect_to=None):
         """Generates the oauth authorize url.
 
         redirect_to string URL shopify will redirect to once authorized.
         """
 
-        url = self._authorize_url.format(base_url = self.base_url)
+        url = self._authorize_url.format(base_url=self.base_url)
 
         params = [
-            ('client_id', self.credentials.api_key)
-            ,('scope', ",".join(self.credentials.scope))
-            ,('redirect_to', redirect_to)
+            ('client_id', self.credentials.api_key),
+            ('scope', ",".join(self.credentials.scope)),
+            ('redirect_to', redirect_to)
         ]
 
         request = PreparedRequest()
@@ -63,29 +65,29 @@ class OAuthEngine():
         return request.url
 
     def oauth_access_token_url(self):
-        url = self._access_token_url.format(base_url = self.base_url)
+        url = self._access_token_url.format(base_url=self.base_url)
 
         params = [
-            ('client_id', self.credentials.api_key)
-            ,('client_secret', self.credentials.secret)
-            ,('code', self.credentials.code)
+            ('client_id', self.credentials.api_key),
+            ('client_secret', self.credentials.secret),
+            ('code', self.credentials.code)
         ]
 
         parser = PreparedRequest()
-        parser.prepare_url(url = url, params = params)
+        parser.prepare_url(url=url, params=params)
         return parser.url
 
     def url_for_request(self, req):
 
         url = "{api_base}/{resource}.{extension}".format(
-            api_base = self.base_url
-            , resource = req.resource
-            , extension = self.extension
+            api_base=self.base_url,
+            resource=req.resource,
+            extension=self.extension
         )
 
         return url
 
-    def _prepare_request(self, req, use_access_token = True):
+    def _prepare_request(self, req, use_access_token=True):
         if use_access_token:
             req.headers(
                 'X-Shopify-Access-Token',
@@ -101,9 +103,9 @@ class OAuthEngine():
         url = self.url_for_request(req)
         request = requests.put(
             url,
-            params = req.params,
+            params=req.params,
             data=req.data,
-            headers = req.headers()
+            headers=req.headers()
         )
 
         return request
@@ -113,7 +115,7 @@ class OAuthEngine():
 
         self._prepare_request(req)
         url = self.url_for_request(req)
-        request = requests.get(url, params = req.params, headers = req.headers())
+        request = requests.get(url, params=req.params, headers=req.headers())
         return request
 
     def post(self, req):
@@ -123,9 +125,9 @@ class OAuthEngine():
         url = self.url_for_request(req)
         request = requests.post(
             url,
-            params = req.params,
+            params=req.params,
             data=req.data,
-            headers = req.headers()
+            headers=req.headers()
         )
 
         return request

@@ -11,19 +11,19 @@
 from .model import Model
 from .blog import Blog
 
+
 class Article(Model):
     """Article
     http://docs.shopify.com/api/article
     """
 
-    resource="articles"
+    resource = "articles"
     is_subresource_of = Blog
 
     supported = ["index", "count", "view", "create", "update", "delete"]
 
     properties = [
-        "author", "blog_id", "body_html", "created_at", "id", "published_at"
-        ,"summary_html", "template_suffix", "title", "updated_at", "user_id"
-        ,"tags"
+        "author", "blog_id", "body_html", "created_at", "id", "published_at",
+        "summary_html", "template_suffix", "title", "updated_at", "user_id",
+        "tags"
     ]
-

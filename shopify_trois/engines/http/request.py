@@ -11,9 +11,10 @@
 from .mapping import mapping as ResourceMapping
 from shopify_trois.models.model import Model
 
+
 class Request:
 
-    def __init__(self, model = None):
+    def __init__(self, model=None):
         self.__headers = {}
 
         '''
@@ -31,7 +32,7 @@ class Request:
         if model:
             self.resource = self.generate_resource_for_model(model)
 
-    def headers(self, key = None, value = None):
+    def headers(self, key=None, value=None):
         if key is None:
             return self.__headers
         else:
@@ -47,8 +48,8 @@ class Request:
 
         if isinstance(model, Model) and hasattr(model, model.primary_key):
             return "/{resource}/{id}".format(
-                resource= resource
-                ,id = getattr(model, model.primary_key)
+                resource=resource,
+                id=getattr(model, model.primary_key)
             )
 
         return "/%s" % resource
