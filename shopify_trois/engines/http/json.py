@@ -17,8 +17,8 @@ class Json(OAuthEngine):
     extension = 'json'
     mime = 'application/json; charset=utf-8'
 
-    def __init__(self, shop, credentials):
-        super().__init__(shop = shop, credentials = credentials)
+    def __init__(self, shop_name, credentials):
+        super().__init__(shop_name = shop_name, credentials = credentials)
 
 
     def add(self, instance, fields):
@@ -43,7 +43,14 @@ class Json(OAuthEngine):
     def index(self, model, **params):
         req = Request(model)
         req.params = params
-        return self.get(req)
+
+        res = self.get(req)
+
+        if res.status_code == requests.codes.ok:
+            return model(**res.json())
+
+        # todo raise an exception
+
 
     def authorize_app_url(self):
         return self.oauth_authorize_url()

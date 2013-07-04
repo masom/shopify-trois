@@ -1,6 +1,6 @@
 from ... import ShopifyTroisTestCase
 
-from shopify_trois import Shop, Credentials, ShopifyException
+from shopify_trois import Credentials, ShopifyException
 from shopify_trois.engines.http.json import Json as Shopify
 from shopify_trois.engines.http.request import Request
 
@@ -14,9 +14,8 @@ class JsonEngineTestCase(ShopifyTroisTestCase):
         self.assertEqual(Shopify.mime, expected)
 
     def test_prepare_request(self):
-        shop = Shop(name = 'test')
         credentials = Credentials()
-        shopify = Shopify(shop = shop, credentials = credentials)
+        shopify = Shopify(shop_name = 'test', credentials = credentials)
 
         request = Request()
         shopify._prepare_request(request)
@@ -34,9 +33,8 @@ class JsonEngineTestCase(ShopifyTroisTestCase):
         self.assertEquals(request.headers(), expected)
 
     def test_url_for_request(self):
-        shop = Shop(name = 'test')
         credentials = Credentials()
-        shopify = Shopify(shop = shop, credentials = credentials)
+        shopify = Shopify(shop_name = 'test', credentials = credentials)
 
         request = Request()
         request.resource = "test"

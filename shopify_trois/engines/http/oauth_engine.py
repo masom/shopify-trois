@@ -14,11 +14,11 @@ from collections import OrderedDict
 
 from shopify_trois.exceptions import ShopifyException
 
+import requests
 from requests.models import PreparedRequest
 
 class OAuthEngine():
 
-    ERR_SHOP_NOT_SET = "The shopify instance does not yet know about the shop it is bound to."
     ERR_CREDENTIALS_NOT_SET = "The shopify instance does not yet know about the shop credentials."
 
     """The api base url."""
@@ -34,19 +34,15 @@ class OAuthEngine():
     """The request mime type."""
     mime = ''
 
-    def __init__(self, shop, credentials):
+    def __init__(self, shop_name, credentials):
         self.credentials = credentials
-        self.shop = shop
 
         # Validate the shopify instance configuration before proceeding.
         self.validate_config()
 
-        self.base_url = self._api_base.format(shop_name=shop.name)
+        self.base_url = self._api_base.format(shop_name=shop_name)
 
     def validate_config(self):
-        if self.shop is None:
-            raise ShopifyException(ERR_SHOP_NOT_SET)
-
         if self.credentials is None:
             raise ShopifyException(ERR_CREDENTIALS_NOT_SET)
 

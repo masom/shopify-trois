@@ -2,7 +2,7 @@ from ... import ShopifyTroisTestCase
 
 from shopify_trois.exceptions import ShopifyException
 
-from shopify_trois import Shop, Credentials
+from shopify_trois import Credentials
 
 from shopify_trois.engines.http.oauth_engine import OAuthEngine
 
@@ -22,9 +22,8 @@ class OAuthEngineTestCase(ShopifyTroisTestCase):
 
     def test_oauth_authorize_url(self):
 
-        shop = Shop(name = 'test')
         credentials = Credentials()
-        shopify = OAuthEngine(shop = shop, credentials = credentials)
+        shopify = OAuthEngine(shop_name = 'test', credentials = credentials)
 
         # Should bail if not scopes are provided.
         try:
@@ -56,9 +55,8 @@ class OAuthEngineTestCase(ShopifyTroisTestCase):
 
     def test_oauth_access_token_url(self):
 
-        shop = Shop(name = 'test')
         credentials = Credentials()
-        shopify = OAuthEngine(shop = shop, credentials = credentials)
+        shopify = OAuthEngine(shop_name = 'test', credentials = credentials)
 
         expected = "https://test.myshopify.com/admin/oauth/access_token?client_id=&client_secret=&code="
         url =  shopify.oauth_access_token_url()
@@ -73,9 +71,8 @@ class OAuthEngineTestCase(ShopifyTroisTestCase):
         self.assertEqual(url, expected)
 
     def test_prepare_request(self):
-        shop = Shop(name = 'test')
         credentials = Credentials()
-        shopify = OAuthEngine(shop = shop, credentials = credentials)
+        shopify = OAuthEngine(shop_name = 'test', credentials = credentials)
 
         request = Request()
         shopify._prepare_request(request)
@@ -93,9 +90,8 @@ class OAuthEngineTestCase(ShopifyTroisTestCase):
         self.assertEquals(request.headers(), expected)
 
     def test_url_for_request(self):
-        shop = Shop(name = 'test')
         credentials = Credentials()
-        shopify = OAuthEngine(shop = shop, credentials = credentials)
+        shopify = OAuthEngine(shop_name = 'test', credentials = credentials)
 
         request = Request()
         request.resource = "test"
