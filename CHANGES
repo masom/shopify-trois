@@ -1,0 +1,15 @@
+Shopify-Trois Changelog
+=========================
+
+Here you can see the full list of changes between each Shopify-Trois release.
+
+Version 0.1
+-----------
+
+Released on July 3rd 2013, codename Latte
+
+- Initial OAuth HTTP engine
+- App authentication using OAuth
+- Initial basic set of models to support further development.
+- Support for Python 3.3 and 3.2
+- First API call made to Shopify, proving the library design will somewhat work.
