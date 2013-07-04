@@ -45,7 +45,7 @@ class Request:
         """
         resource = ResourceMapping.get(model.resource, model.resource)
 
-        if isinstance(model, Model):
+        if isinstance(model, Model) and hasattr(model, model.primary_key):
             return "/{resource}/{id}".format(
                 resource= resource
                 ,id = getattr(model, model.primary_key)

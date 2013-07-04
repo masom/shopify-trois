@@ -25,13 +25,6 @@ class OAuthEngineTestCase(ShopifyTroisTestCase):
         credentials = Credentials()
         shopify = OAuthEngine(shop_name = 'test', credentials = credentials)
 
-        # Should bail if not scopes are provided.
-        try:
-            url = shopify.oauth_authorize_url(redirect_to = 'http://localhost/installed')
-            self.fail()
-        except ShopifyException:
-            pass
-
         credentials.scope = ['yup']
         url = shopify.oauth_authorize_url(redirect_to = 'http://localhost/installed')
         expected = "https://test.myshopify.com/admin/oauth/authorize?client_id=&scope=yup&redirect_to=http%3A%2F%2Flocalhost%2Finstalled"

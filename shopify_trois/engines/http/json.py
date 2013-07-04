@@ -8,6 +8,7 @@
     :license: MIT, see LICENSE for more details.
 """
 import requests
+import json
 
 from shopify_trois.engines.http.oauth_engine import OAuthEngine
 from shopify_trois.engines.http.request import Request
@@ -46,7 +47,10 @@ class Json(OAuthEngine):
         #TODO use the model `properties` when generating the json document.
 
         req = Request(instance)
-        req.data = json.dumps(instance.to_dict())
+
+        enclosure = instance.__class__.__name__.lower()
+
+        req.data = json.dumps({ enclosure: instance.to_dict()})
 
         res = self.post(req)
 
@@ -133,7 +137,7 @@ class Json(OAuthEngine):
         :param options: Query parameters (see shopify documentation)
         """
 
-        self._can_request("index", instance)
+        self._can_request("index", model)
 
         req = Request(model)
         req.params = params
@@ -157,7 +161,7 @@ class Json(OAuthEngine):
 
         oauth_token = self.oauth_access_token()
         self.credentials.code = None
-        self.credentials.oauth_access_token = data['access_token']
+        self.credentials.oauth_access_token = oauth_token
 
     def oauth_access_token(self):
         """Fetch the OAuth access token from shopify.
@@ -174,7 +178,7 @@ class Json(OAuthEngine):
             data = r.json()
             return data['access_token']
 
-        raise ShopifyException(r.text())
+        raise ShopifyException(r)
 
     def _can_request(self, method, model):
         """Verify the request method is supported by the provided model.

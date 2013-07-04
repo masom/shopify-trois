@@ -8,8 +8,6 @@
     :license: MIT, see LICENSE for more details.
 """
 
-ERR_MISSING_SCOPE = "At least 1 scope must be provided."
-
 from collections import OrderedDict
 
 from shopify_trois.exceptions import ShopifyException
@@ -51,9 +49,6 @@ class OAuthEngine():
 
         redirect_to string URL shopify will redirect to once authorized.
         """
-
-        if not self.credentials.scope:
-            raise ShopifyException(ERR_MISSING_SCOPE)
 
         url = self._authorize_url.format(base_url = self.base_url)
 
