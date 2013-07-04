@@ -22,7 +22,7 @@ Shopify API for Python 3.3
 
     credentials.code = "oauth temporary code"
     # fetch the access token
-    shopify.engine.oauth_access_token()
+    shopify.oauth_access_token()
 
     # set the access token in the credentials object.
     credentials.oauth_access_token = "your access token"
