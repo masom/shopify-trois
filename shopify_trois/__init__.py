@@ -1,4 +1,5 @@
 __version__ = '0.2-dev'
 
-from shopify_trois.credentials import Credentials
-from shopify_trois.exceptions import *
+from .collection import Collection
+from .credentials import Credentials
+from .exceptions import *

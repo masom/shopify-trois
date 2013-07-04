@@ -1,2 +1,4 @@
 __pycache__
 test_store.py
+cover
+.coverage

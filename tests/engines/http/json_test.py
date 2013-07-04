@@ -3,6 +3,8 @@ from ... import ShopifyTroisTestCase
 from shopify_trois import Credentials, ShopifyException
 from shopify_trois.engines.http.json import Json as Shopify
 from shopify_trois.engines.http.request import Request
+from shopify_trois.models.model import Model
+from shopify_trois.exceptions import *
 
 class JsonEngineTestCase(ShopifyTroisTestCase):
 
@@ -49,3 +51,24 @@ class JsonEngineTestCase(ShopifyTroisTestCase):
         # actual request.{method} will escape the url for us.
         expected = "https://test.myshopify.com/admin/test/mmmm food.json"
         self.assertEquals(url, expected)
+
+    def test_can_request(self):
+        credentials = Credentials()
+        shopify = Shopify(shop_name = 'test', credentials = credentials)
+
+        model = Model()
+        try:
+            shopify._can_request("create", model)
+            self.fail()
+        except InvalidRequestException:
+            pass
+
+        try:
+            shopify._can_request("create", Model)
+            self.fail()
+        except InvalidRequestException:
+            pass
+
+
+        model.supported.append("create")
+        shopify._can_request("create", model)
