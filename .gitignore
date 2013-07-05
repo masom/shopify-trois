@@ -2,5 +2,7 @@ __pycache__
 docs/_build
 test_store.py
 cover
+build
+dist
 .coverage
 *.egg-info

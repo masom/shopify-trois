@@ -1,6 +1,6 @@
 include CHANGES LICENSE
-recursive-include shopify_trois.engines *.py
-recursive-include shopify_trois.models *.py
+recursive-include shopify_trois.engines *
+recursive-include shopify_trois.models *
 recursive-include tests *
 recursive-include docs *
 recursive-include docs *.pyc
