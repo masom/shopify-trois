@@ -18,9 +18,6 @@ from requests.models import PreparedRequest
 
 class OAuthEngine():
 
-    ERR_CREDENTIALS_NOT_SET = "The shopify instance does not yet know about" \
-                              " the shop credentials."
-
     """The api base url."""
     _api_base = "https://{shop_name}.myshopify.com/admin"
 
@@ -35,21 +32,20 @@ class OAuthEngine():
     mime = ''
 
     def __init__(self, shop_name, credentials):
+        """
+        :param shop_name: The shopify store name
+        :param credentials: A :class:`~shopify_trois.credential.Credential`
+                            instance.
+        """
+
         self.credentials = credentials
 
-        # Validate the shopify instance configuration before proceeding.
-        self.validate_config()
-
         self.base_url = self._api_base.format(shop_name=shop_name)
-
-    def validate_config(self):
-        if self.credentials is None:
-            raise ShopifyException(ERR_CREDENTIALS_NOT_SET)
 
     def oauth_authorize_url(self, redirect_to=None):
         """Generates the oauth authorize url.
 
-        redirect_to string URL shopify will redirect to once authorized.
+        :param redirect_to: URL shopify will redirect to once authorized.
         """
 
         url = self._authorize_url.format(base_url=self.base_url)
@@ -65,6 +61,8 @@ class OAuthEngine():
         return request.url
 
     def oauth_access_token_url(self):
+        """Generate the OAuth access token url."""
+
         url = self._access_token_url.format(base_url=self.base_url)
 
         params = [
@@ -78,6 +76,10 @@ class OAuthEngine():
         return parser.url
 
     def url_for_request(self, req):
+        """Generates the url for the provided request.
+
+        :param req: See :class:`~shopify_trois.engines.http.request.Request`
+        """
 
         url = "{api_base}/{resource}.{extension}".format(
             api_base=self.base_url,
@@ -97,7 +99,10 @@ class OAuthEngine():
         req.headers('Content-Type', self.mime)
 
     def put(self, req):
-        """Perform a PUT request to Shopify."""
+        """Perform a PUT request to Shopify.
+
+        :param req: See :class:`~shopify_trois.engines.http.request.Request`
+        """
 
         self._prepare_request(req)
         url = self.url_for_request(req)
@@ -111,7 +116,10 @@ class OAuthEngine():
         return request
 
     def get(self, req):
-        """Perform a GET request to Shopify."""
+        """Perform a GET request to Shopify.
+
+        :param req: See :class:`~shopify_trois.engines.http.request.Request`
+        """
 
         self._prepare_request(req)
         url = self.url_for_request(req)
@@ -119,7 +127,9 @@ class OAuthEngine():
         return request
 
     def post(self, req):
-        """Perform a POST request to Shopify"""
+        """Perform a POST request to Shopify
+        :param req: See :class:`~shopify_trois.engines.http.request.Request`
+        """
 
         self._prepare_request(req)
         url = self.url_for_request(req)

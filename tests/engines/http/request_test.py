@@ -41,3 +41,9 @@ class RequestTestCase(ShopifyTroisTestCase):
         result = r.generate_resource_for_model(model)
         self.assertEquals(result, '/test/1')
 
+        instance = TestModel(id = 1)
+        r = Request(instance)
+        self.assertEquals(r.resource, '/test/1')
+
+        r = Request(TestModel)
+        self.assertEquals(r.resource, '/test')
