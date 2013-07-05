@@ -3,6 +3,17 @@ Shopify-Trois Changelog
 
 Here you can see the full list of changes between each Shopify-Trois release.
 
+Version 0.2
+-----------
+
+Released on July 5th 2013, codename Americano
+
+- Collection class allows easily iterating index results.
+- Moved to requests.Session instead of requests.<method>
+- Instance properties filtering when updating/creating new entities. (Can be disabled)
+- Some docs
+- PEP 8 and PyFlakes
+
 Version 0.1
 -----------
 
