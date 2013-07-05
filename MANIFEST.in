@@ -1,5 +1,0 @@
-include CHANGES LICENSE
-recursive-include tests *
-recursive-include docs *
-prune docs/_build
-prune docs/_themes/.git
