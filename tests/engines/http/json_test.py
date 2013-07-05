@@ -15,24 +15,17 @@ class JsonEngineTestCase(ShopifyTroisTestCase):
         expected = "application/json; charset=utf-8"
         self.assertEqual(Shopify.mime, expected)
 
-    def test_prepare_request(self):
+    def test_headers(self):
         credentials = Credentials()
         shopify = Shopify(shop_name = 'test', credentials = credentials)
 
-        request = Request()
-        shopify._prepare_request(request)
-        expected = {
-            "X-Shopify-Access-Token": None,
-            "Content-Type": "application/json; charset=utf-8"
-        }
-        self.assertEquals(request.headers(), expected)
+        expected =  "application/json; charset=utf-8"
+        self.assertEquals(shopify.session.headers['Content-Type'], expected)
 
-        request = Request()
-        shopify._prepare_request(request, use_access_token = False)
-        expected = {
-            "Content-Type": "application/json; charset=utf-8"
-        }
-        self.assertEquals(request.headers(), expected)
+        credentials = Credentials(oauth_access_token="test")
+        shopify = Shopify(shop_name = 'test', credentials = credentials)
+        expected = "test"
+        self.assertEquals(shopify.session.headers["X-Shopify-Access-Token"], expected)
 
     def test_url_for_request(self):
         credentials = Credentials()

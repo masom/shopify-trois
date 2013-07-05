@@ -183,6 +183,10 @@ class Json(OAuthEngine):
         self.credentials.code = None
         self.credentials.oauth_access_token = oauth_token
 
+        self.session.headers.update({
+            'X-Shopify-Access-Token': self.credentials.oauth_access_token
+        })
+
     def oauth_access_token(self):
         """Fetch the OAuth access token from shopify.
 

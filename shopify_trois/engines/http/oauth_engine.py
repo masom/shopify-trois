@@ -39,6 +39,14 @@ class OAuthEngine():
 
         self.base_url = self._api_base.format(shop_name=shop_name)
 
+        self.session = requests.Session()
+        self.session.headers.update({'Content-Type': self.mime})
+
+        if credentials.oauth_access_token:
+            self.session.headers.update({
+                'X-Shopify-Access-Token': credentials.oauth_access_token
+            })
+
     def oauth_authorize_url(self, redirect_to=None):
         """Generates the oauth authorize url.
 
@@ -86,24 +94,14 @@ class OAuthEngine():
 
         return url
 
-    def _prepare_request(self, req, use_access_token=True):
-        if use_access_token:
-            req.headers(
-                'X-Shopify-Access-Token',
-                self.credentials.oauth_access_token
-            )
-
-        req.headers('Content-Type', self.mime)
-
     def put(self, req):
         """Perform a PUT request to Shopify.
 
         :param req: See :class:`~shopify_trois.engines.http.request.Request`
         """
 
-        self._prepare_request(req)
         url = self.url_for_request(req)
-        request = requests.put(
+        request = self.session.put(
             url,
             params=req.params,
             data=req.data,
@@ -118,9 +116,12 @@ class OAuthEngine():
         :param req: See :class:`~shopify_trois.engines.http.request.Request`
         """
 
-        self._prepare_request(req)
         url = self.url_for_request(req)
-        request = requests.get(url, params=req.params, headers=req.headers())
+        request = self.session.get(
+            url,
+            params=req.params,
+            headers=req.headers()
+        )
         return request
 
     def post(self, req):
@@ -128,9 +129,8 @@ class OAuthEngine():
         :param req: See :class:`~shopify_trois.engines.http.request.Request`
         """
 
-        self._prepare_request(req)
         url = self.url_for_request(req)
-        request = requests.post(
+        request = self.session.post(
             url,
             params=req.params,
             data=req.data,

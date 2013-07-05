@@ -63,25 +63,6 @@ class OAuthEngineTestCase(ShopifyTroisTestCase):
         url =  shopify.oauth_access_token_url()
         self.assertEqual(url, expected)
 
-    def test_prepare_request(self):
-        credentials = Credentials()
-        shopify = OAuthEngine(shop_name = 'test', credentials = credentials)
-
-        request = Request()
-        shopify._prepare_request(request)
-        expected = {
-            "X-Shopify-Access-Token": None,
-            "Content-Type": ""
-        }
-        self.assertEquals(request.headers(), expected)
-
-        request = Request()
-        shopify._prepare_request(request, use_access_token = False)
-        expected = {
-            "Content-Type": ""
-        }
-        self.assertEquals(request.headers(), expected)
-
     def test_url_for_request(self):
         credentials = Credentials()
         shopify = OAuthEngine(shop_name = 'test', credentials = credentials)

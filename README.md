@@ -9,9 +9,9 @@ Shopify API for Python 3.3
     from shopify_trois.engines.http.json import Json as Shopify
 
     credentials = Credentials(
-        api_key = 'your api key'
-        ,scope = ['read_orders']
-        ,secret = 'your api key secret'
+        api_key='your api key',
+        scope=['create_webhooks'],
+        secret='your api key secret'
     )
     shopify = Shopify(shop_name = "your store name", credentials = credentials)
 
