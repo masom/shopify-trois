@@ -12,7 +12,7 @@ import json
 
 from shopify_trois.engines.http.oauth_engine import OAuthEngine
 from shopify_trois.engines.http.request import Request
-from shopify_trois.exceptions import *
+from shopify_trois.exceptions import ShopifyException, InvalidRequestException
 
 
 class Json(OAuthEngine):
@@ -121,7 +121,7 @@ class Json(OAuthEngine):
         :param primary_key: The primary key value of the instance.
         """
 
-        self._can_request("view", instance)
+        self._can_request("view", model)
 
         req = Request(model)
         req.resource += "/{primary_key}".format(primary_key=primary_key)

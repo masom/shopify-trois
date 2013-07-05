@@ -8,10 +8,6 @@
     :license: MIT, see LICENSE for more details.
 """
 
-from collections import OrderedDict
-
-from shopify_trois.exceptions import ShopifyException
-
 import requests
 from requests.models import PreparedRequest
 
