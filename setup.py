@@ -19,7 +19,7 @@ setup(
     maintainer_email='pyrolian@gmail.com',
     description='Shopify API for Python 3',
     long_description=__doc__,
-    packages=['shopify_trois'],
+    packages=['shopify_trois', 'shopify_trois.models', 'shopify_trois.engines', 'shopify_trois.engines.http'],
     zip_safe=False,
     platforms='any',
     install_requires=[

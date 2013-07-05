@@ -16,21 +16,23 @@ from shopify_trois.exceptions import *
 
 
 class Json(OAuthEngine):
+    """The Json engine implements an http transport using JSON with OAuth
+    authentication.
+
+    :param shop_name: The name of the shopify store.
+    :param credentials: :class:`~shopify_trois.credential.Credential`
+    :param ignore_supported: When set to True, the engine will ignore
+                                the ``supported`` property of the models.
+    :param ignore_model_properties: When set to True, the engine will
+                                    ignore the ``properties`` property of
+                                    models when persisting them.
+    """
+
     extension = 'json'
     mime = 'application/json; charset=utf-8'
 
     def __init__(self, shop_name, credentials, ignore_supported=False,
                  ignore_model_properties=False):
-        """Initialize the Json engine.
-
-        :param shop_name: The name of the shopify store.
-        :param credentials: :class:`~shopify_trois.credential.Credential`
-        :param ignore_supported: When set to True, the engine will ignore
-                                 the ``supported`` property of the models.
-        :param ignore_model_properties: When set to True, the engine will
-                                        ignore the ``properties`` property of
-                                        models when persisting them.
-        """
 
         super().__init__(shop_name=shop_name, credentials=credentials)
 
