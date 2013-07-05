@@ -38,6 +38,7 @@ class Json(OAuthEngine):
 
         #: When set to True, ignore checking for supported actions on models.
         self.ignore_supported = ignore_supported
+        self.ignore_model_properties = ignore_model_properties
 
     def add(self, instance):
         """Add the model instance to the store.
@@ -47,13 +48,19 @@ class Json(OAuthEngine):
 
         self._can_request("create", instance)
 
-        #TODO use the model `properties` when generating the json document.
-
         req = Request(instance)
 
         enclosure = instance.__class__.__name__.lower()
 
-        req.data = json.dumps({enclosure: instance.to_dict()})
+        if self.ignore_model_properties:
+            data = instance.to_dict()
+        else:
+            data = dict([
+                (k, v) for k, v in instance.to_dict().items()
+                if k in instance.properties
+            ])
+
+        req.data = json.dumps({enclosure: data})
 
         res = self.post(req)
 
@@ -102,10 +109,18 @@ class Json(OAuthEngine):
             msg = "The supplied instance does not yet exists."
             raise InvalidRequestException(msg)
 
-        #TODO use the model `properties` when generating the json document.
+        enclosure = instance.__class__.__name__.lower()
+
+        if self.ignore_model_properties:
+            data = instance.to_dict()
+        else:
+            data = dict([
+                (k, v) for k, v in instance.to_dict().items()
+                if k in instance.properties
+            ])
 
         req = Request(instance)
-        req.data = json.dumps(instance.to_dict())
+        req.data = json.dumps({enclosure: data})
 
         res = self.post(req)
 
@@ -114,16 +129,18 @@ class Json(OAuthEngine):
 
         raise ShopifyException(res)
 
-    def view(self, model, primary_key):
+    def view(self, model, primary_key, **params):
         """Get a specific model instance by primary key.
 
         :param Model: The class being queried.
         :param primary_key: The primary key value of the instance.
+        :param params: Query parameters.
         """
 
         self._can_request("view", model)
 
         req = Request(model)
+        req.params = params
         req.resource += "/{primary_key}".format(primary_key=primary_key)
 
         res = self.get(req)

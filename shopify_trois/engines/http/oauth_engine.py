@@ -13,6 +13,7 @@ from requests.models import PreparedRequest
 
 
 class OAuthEngine():
+    """"""
 
     """The api base url."""
     _api_base = "https://{shop_name}.myshopify.com/admin"
