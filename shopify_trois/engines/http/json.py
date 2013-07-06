@@ -40,17 +40,20 @@ class Json(OAuthEngine):
         self.ignore_supported = ignore_supported
         self.ignore_model_properties = ignore_model_properties
 
-    def add(self, instance):
+    def add(self, instance, auto_update=True):
         """Add the model instance to the store.
 
         :param instance: The model instance being added.
+        :param auto_update: Auto-update the instance with the values from
+                            Shopify. When set to false, the raw JSON object
+                            will be returned.
         """
 
         self._can_request("create", instance)
 
         req = Request(instance)
 
-        enclosure = instance.__class__.__name__.lower()
+        enclosure = instance.to_underscore_name()
 
         if self.ignore_model_properties:
             data = instance.to_dict()
@@ -65,7 +68,13 @@ class Json(OAuthEngine):
         res = self.post(req)
 
         if res.status_code == requests.codes.created:
-            return res.json()
+            if auto_update:
+                instance.update(
+                    res.json(),
+                    ignore_properties=self.ignore_model_properties
+                )
+            else:
+                return res.json()
 
         raise ShopifyException(res)
 
@@ -92,13 +101,16 @@ class Json(OAuthEngine):
 
         raise ShopifyException(res)
 
-    def update(self, instance, whitelist=None):
+    def update(self, instance, auto_update=True, whitelist=None):
         """Update a model instance.
 
         An InvalidRequestException will be raised if the instance has not been
         marked as existing.
 
         :param instance: The model instance being updated.
+        :param auto_update: Auto-update the instance with the values from
+                            Shopify. When set to False, the raw JSON object
+                            will be returned.
         :param whitelist: A list of attributes to be updated. If set to None,
                           all modified attributes will be updated.
         """
@@ -109,7 +121,7 @@ class Json(OAuthEngine):
             msg = "The supplied instance does not yet exists."
             raise InvalidRequestException(msg)
 
-        enclosure = instance.__class__.__name__.lower()
+        enclosure = instance.to_underscore_name()
 
         if self.ignore_model_properties:
             data = instance.to_dict()
@@ -125,7 +137,10 @@ class Json(OAuthEngine):
         res = self.post(req)
 
         if res.status_code == requests.status.ok:
-            return res.json()
+            if auto_update:
+                instance.update(res.json())
+            else:
+                return res.json()
 
         raise ShopifyException(res)
 

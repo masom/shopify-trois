@@ -8,6 +8,8 @@
     :license: MIT, see LICENSE for more details.
 """
 
+import re
+
 
 class Meta():
     def __init__(self):
@@ -57,6 +59,28 @@ class Model():
         data = dict(self.__dict__)
         del(data['_meta__'])
         return data
+
+    @classmethod
+    def to_underscore_name(cls):
+        s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', cls.__name__)
+        return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
+
+    def update(self, data, ignore_properties=False):
+
+        entity_name = self.to_underscore_name()
+
+        if not entity_name in data:
+            msg = "The data set does not contain `%s`"
+            raise KeyError(msg % self.resource)
+
+        raw = data[entity_name]
+
+        if ignore_properties:
+            properties = raw.keys()
+        else:
+            properties = self.properties
+
+        [setattr(self, k, v) for k, v in raw.items() if k in properties]
 
     def changes(self):
         missing = object()

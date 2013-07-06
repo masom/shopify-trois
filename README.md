@@ -41,8 +41,8 @@ Shopify API for Python 3.3
     webhook.format = "json"
     webhook.topic = "orders/create"
 
-    # Create a new webhook, returning a dict. The original webhook is not modified.
-    raw = shopify.add(webhook)
+    # Create the webhook
+    shopify.add(webhook)
 
     # Get all the webhooks and iterates them
     raw = shopify.index(Webhook)
