@@ -15,7 +15,7 @@ class Shop(Model):
     """Shop
     http://docs.shopify.com/api/shop
     """
-    resource = "shops"
+    resource = "shop"
 
     supported = ["index"]
 

@@ -28,6 +28,9 @@ class Model():
     """Mark the model as being a subresource of another."""
     is_subresource_of = None
 
+    """Holds the model parent id value. Used with :attr:`is_subresource_of`."""
+    parent_id = None
+
     """List of supported actions on the resource."""
     supported = []
 
