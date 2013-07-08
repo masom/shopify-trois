@@ -33,6 +33,18 @@ class ModelTest(ShopifyTroisTestCase):
         self.assertEquals(a.changes(), {})
         self.assertEquals(a.to_dict(), {'name': 'test', 'id': 2, 'age': 33})
 
+    def test_changes(self):
+
+        entity = TestModel(id="test", name="hello")
+        self.assertFalse(entity.changes())
+
+        entity.name = "bob"
+        self.assertTrue("name" in entity.changes())
+        self.assertEquals(entity.changes(), {"name": "bob"})
+
+        del(entity.id)
+        self.assertFalse("id" in entity.changes())
+
     def test_to_underscore_name(self):
 
         expected = "test_model"

@@ -10,6 +10,7 @@
 import requests
 import json
 
+from shopify_trois.collection import Collection
 from shopify_trois.engines.http.oauth_engine import OAuthEngine
 from shopify_trois.engines.http.request import Request
 from shopify_trois.exceptions import ShopifyException, InvalidRequestException
@@ -177,7 +178,7 @@ class Json(OAuthEngine):
 
         raise ShopifyException(res)
 
-    def index(self, model, **params):
+    def index(self, model, auto_instance=True, **params):
         """Fetch the index for a given model and supplied parameters.
 
         :param model: The model being queried.
@@ -192,7 +193,10 @@ class Json(OAuthEngine):
         res = self.get(req)
 
         if res.status_code == requests.codes.ok:
-            return res.json()
+            if auto_instance:
+                return Collection(model, res.json())
+            else:
+                return res.json()
 
         raise ShopifyException(res)
 
@@ -223,7 +227,7 @@ class Json(OAuthEngine):
         url = self.oauth_access_token_url()
         headers = {"Content-Type": self.mime}
 
-        r = requests.post(url, headers=headers)
+        r = self.session.post(url, headers=headers)
 
         if r.status_code == requests.codes.ok:
             data = r.json()

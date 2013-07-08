@@ -4,14 +4,14 @@ import requests
 import mock
 
 from shopify_trois.exceptions import InvalidRequestException, ShopifyException
-from shopify_trois import Credentials
-from shopify_trois.engines.http.json import Json as Shopify
+from shopify_trois import Credentials, Collection
+from shopify_trois.engines.http import Json as Shopify
 from shopify_trois.engines.http.request import Request
 from shopify_trois.models.model import Model
 
 
 class TestModel(Model):
-    resource = "tests"
+    resource = "test_models"
     supported = ['update', 'view', 'create', 'index', 'delete']
     properties = ['id', 'name']
 
@@ -128,6 +128,37 @@ class JsonEngineTestCase(ShopifyTroisTestCase):
         except ShopifyException:
             pass
 
+    def test_index(self):
+        encoding = 'UTF-8'
+        credentials = Credentials()
+        shopify = Shopify(shop_name='test', credentials=credentials)
+
+        data = '{"test_models": [{"id": 1, "name": "test"}]}'
+        response = requests.Response()
+        response.encoding = encoding
+        response._content = data.encode(encoding)
+        response.status_code = 200
+
+        shopify.session.get = mock.Mock(return_value=response)
+
+        result = shopify.index(TestModel)
+        self.assertIsInstance(result, Collection)
+
+        result = shopify.index(TestModel, auto_instance=False)
+        self.assertIsInstance(result, dict)
+        self.assertTrue("test_models" in result)
+
+        try:
+            response = requests.Response()
+            response.encoding = encoding
+            response._content = data.encode(encoding)
+            response.status_code = 404
+            shopify.session.get = mock.Mock(return_value=response)
+            result = shopify.index(TestModel)
+            self.fail()
+        except ShopifyException:
+            pass
+
     def test_view(self):
         encoding = 'UTF-8'
         credentials = Credentials()
@@ -229,6 +260,59 @@ class JsonEngineTestCase(ShopifyTroisTestCase):
         try:
             instance = TestModel(id=4)
             shopify.remove(instance)
+            self.fail()
+        except ShopifyException:
+            pass
+
+    def test_setup_access_token(self):
+        encoding = 'UTF-8'
+        credentials = Credentials()
+        shopify = Shopify(shop_name='test', credentials=credentials)
+
+        data = '{"access_token": "test"}'
+        response = requests.Response()
+        response.encoding = encoding
+        response._content = data.encode(encoding)
+        response.status_code = 200
+        shopify.session.post = mock.Mock(return_value=response)
+
+        shopify.setup_access_token()
+
+        self.assertEquals(credentials.oauth_access_token, "test")
+        self.assertTrue('X-Shopify-Access-Token' in shopify.session.headers)
+
+    def test_authorize_app_url(self):
+        credentials = Credentials()
+        shopify = Shopify(shop_name='test', credentials=credentials)
+
+        expected = "https://test.myshopify.com/admin/oauth/authorize" \
+                   "?client_id=&scope="
+
+        result = shopify.authorize_app_url()
+        self.assertEquals(
+            result,
+            expected
+        )
+
+    def test_oauth_access_token(self):
+        encoding = 'UTF-8'
+        credentials = Credentials()
+        shopify = Shopify(shop_name='test', credentials=credentials)
+
+        data = '{"access_token": "test"}'
+        response = requests.Response()
+        response.encoding = encoding
+        response._content = data.encode(encoding)
+        response.status_code = 200
+        shopify.session.post = mock.Mock(return_value=response)
+
+        access_token = shopify.oauth_access_token()
+        self.assertEquals(access_token, "test")
+
+        response.status_code = 403
+        shopify.session.post = mock.Mock(return_value=response)
+        try:
+            access_token = shopify.oauth_access_token()
             self.fail()
         except ShopifyException:
             pass
