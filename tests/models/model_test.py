@@ -60,3 +60,18 @@ class ModelTest(ShopifyTroisTestCase):
         a = TestModel(id=1)
         a.update({"test_model": {"id": 3}})
         self.assertEquals(a.changes(), {"id": 3})
+
+    def test_update_properties_check(self):
+        a = TestModel(id=1)
+        a.update({"test_model": {"id": 3, "name": "test"}})
+        self.assertFalse(hasattr(a, "name"))
+
+        a = TestModel(id=1)
+        a.update({"test_model": {"id": 3, "name": "test"}})
+        self.assertFalse(hasattr(a, "name"))
+
+        a.update(
+            {"test_model": {"id": 3, "name": "test"}},
+            ignore_properties=True
+        )
+        self.assertTrue(hasattr(a, "name"))

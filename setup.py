@@ -31,7 +31,7 @@ setup(
     ],
     test_suite='nose.collector',
     tests_require=[
-        'pytest', 'nose'
+        'pytest', 'nose', 'mock'
     ],
     classifiers=[
         'Development Status :: 4 - Beta',

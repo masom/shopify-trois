@@ -73,6 +73,7 @@ class Json(OAuthEngine):
                     res.json(),
                     ignore_properties=self.ignore_model_properties
                 )
+                return
             else:
                 return res.json()
 
@@ -89,7 +90,7 @@ class Json(OAuthEngine):
 
         self._can_request("delete", instance)
 
-        if not instance._meta.exists:
+        if not instance._meta__.exists:
             msg = "The supplied instance does not yet exists."
             raise InvalidRequestException(msg)
 
@@ -97,7 +98,7 @@ class Json(OAuthEngine):
         res = self.delete(req)
 
         if res.status_code == requests.codes.ok:
-            return res.json()
+            return True
 
         raise ShopifyException(res)
 
@@ -117,7 +118,7 @@ class Json(OAuthEngine):
 
         self._can_request("update", instance)
 
-        if not instance._meta.exists:
+        if not instance._meta__.exists:
             msg = "The supplied instance does not yet exists."
             raise InvalidRequestException(msg)
 
@@ -134,21 +135,27 @@ class Json(OAuthEngine):
         req = Request(instance)
         req.data = json.dumps({enclosure: data})
 
-        res = self.post(req)
+        res = self.put(req)
 
-        if res.status_code == requests.status.ok:
+        if res.status_code == requests.codes.ok:
             if auto_update:
-                instance.update(res.json())
+                instance.update(
+                    res.json(),
+                    ignore_properties=self.ignore_model_properties
+                )
+                return
             else:
                 return res.json()
 
         raise ShopifyException(res)
 
-    def view(self, model, primary_key, **params):
+    def view(self, model, primary_key, auto_instance=True, **params):
         """Get a specific model instance by primary key.
 
         :param Model: The class being queried.
         :param primary_key: The primary key value of the instance.
+        :param auto_instance: Automatically create an instance instead of
+                              returning a json object.
         :param params: Query parameters.
         """
 
@@ -161,7 +168,12 @@ class Json(OAuthEngine):
         res = self.get(req)
 
         if res.status_code == requests.codes.ok:
-            return res.json()
+            data = res.json()
+            if auto_instance:
+                enclosure = model.to_underscore_name()
+                return model(**data[enclosure])
+            else:
+                return data
 
         raise ShopifyException(res)
 

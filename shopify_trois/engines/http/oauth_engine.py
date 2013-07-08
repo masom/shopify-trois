@@ -86,7 +86,7 @@ class OAuthEngine():
         :param req: See :class:`~shopify_trois.engines.http.request.Request`
         """
 
-        url = "{api_base}/{resource}.{extension}".format(
+        url = "{api_base}{resource}.{extension}".format(
             api_base=self.base_url,
             resource=req.resource,
             extension=self.extension
@@ -131,6 +131,21 @@ class OAuthEngine():
 
         url = self.url_for_request(req)
         request = self.session.post(
+            url,
+            params=req.params,
+            data=req.data,
+            headers=req.headers()
+        )
+
+        return request
+
+    def delete(self, req):
+        """Perform a DELETE request to Shopify
+        :param req: See :class:`~shopify_trois.engines.http.request.Request`
+        """
+
+        url = self.url_for_request(req)
+        request = self.session.delete(
             url,
             params=req.params,
             data=req.data,
