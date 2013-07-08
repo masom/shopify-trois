@@ -94,7 +94,7 @@ class OAuthEngine():
 
         return url
 
-    def put(self, req):
+    def _put(self, req):
         """Perform a PUT request to Shopify.
 
         :param req: See :class:`~shopify_trois.engines.http.request.Request`
@@ -110,7 +110,7 @@ class OAuthEngine():
 
         return request
 
-    def get(self, req):
+    def _get(self, req):
         """Perform a GET request to Shopify.
 
         :param req: See :class:`~shopify_trois.engines.http.request.Request`
@@ -124,7 +124,7 @@ class OAuthEngine():
         )
         return request
 
-    def post(self, req):
+    def _post(self, req):
         """Perform a POST request to Shopify
         :param req: See :class:`~shopify_trois.engines.http.request.Request`
         """
@@ -139,7 +139,7 @@ class OAuthEngine():
 
         return request
 
-    def delete(self, req):
+    def _delete(self, req):
         """Perform a DELETE request to Shopify
         :param req: See :class:`~shopify_trois.engines.http.request.Request`
         """

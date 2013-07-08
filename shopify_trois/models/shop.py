@@ -17,7 +17,7 @@ class Shop(Model):
     """
     resource = "shop"
 
-    supported = ["index"]
+    supported = ["view"]
 
     properties = [
         "address1", "city", "country", "created_at", "customer_email",

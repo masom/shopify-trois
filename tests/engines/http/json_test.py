@@ -159,7 +159,7 @@ class JsonEngineTestCase(ShopifyTroisTestCase):
         except ShopifyException:
             pass
 
-    def test_view(self):
+    def test_fetch(self):
         encoding = 'UTF-8'
         credentials = Credentials()
         shopify = Shopify(shop_name='test', credentials=credentials)
@@ -171,12 +171,12 @@ class JsonEngineTestCase(ShopifyTroisTestCase):
         response.status_code = 200
 
         shopify.session.get = mock.Mock(return_value=response)
-        instance = shopify.view(TestModel, 2)
+        instance = shopify.fetch(TestModel, 2)
         self.assertIsInstance(instance, TestModel)
         self.assertEquals(instance.name, "test")
         self.assertEquals(instance.id, 1)
 
-        result = shopify.view(TestModel, 2, auto_instance=False)
+        result = shopify.fetch(TestModel, 2, auto_instance=False)
         self.assertIsInstance(result, dict)
 
         try:
@@ -185,7 +185,7 @@ class JsonEngineTestCase(ShopifyTroisTestCase):
             response._content = data.encode(encoding)
             response.status_code = 404
             shopify.session.get = mock.Mock(return_value=response)
-            result = shopify.view(TestModel, 2)
+            result = shopify.fetch(TestModel, 2)
             self.fail()
         except ShopifyException:
             pass
@@ -234,7 +234,7 @@ class JsonEngineTestCase(ShopifyTroisTestCase):
         except ShopifyException:
             pass
 
-    def test_remove(self):
+    def test_delete(self):
         credentials = Credentials()
         shopify = Shopify(shop_name='test', credentials=credentials)
 
@@ -245,13 +245,13 @@ class JsonEngineTestCase(ShopifyTroisTestCase):
         # A new entity should not be removable.
         try:
             instance = TestModel()
-            shopify.remove(instance)
+            shopify.delete(instance)
             self.fail()
         except InvalidRequestException:
             pass
 
         instance = TestModel(id=1)
-        result = shopify.remove(instance)
+        result = shopify.delete(instance)
         self.assertTrue(result)
 
         response = requests.Response()
@@ -259,7 +259,7 @@ class JsonEngineTestCase(ShopifyTroisTestCase):
         shopify.session.delete = mock.Mock(return_value=response)
         try:
             instance = TestModel(id=4)
-            shopify.remove(instance)
+            shopify.delete(instance)
             self.fail()
         except ShopifyException:
             pass

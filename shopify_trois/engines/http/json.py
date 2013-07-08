@@ -66,7 +66,7 @@ class Json(OAuthEngine):
 
         req.data = json.dumps({enclosure: data})
 
-        res = self.post(req)
+        res = self._post(req)
 
         if res.status_code == requests.codes.created:
             if auto_update:
@@ -80,8 +80,8 @@ class Json(OAuthEngine):
 
         raise ShopifyException(res)
 
-    def remove(self, instance):
-        """Remove (delete) a model instance.
+    def delete(self, instance):
+        """Delete a model instance.
 
         An InvalidRequestException will be raised if the instance does not yet
         exists.
@@ -96,7 +96,7 @@ class Json(OAuthEngine):
             raise InvalidRequestException(msg)
 
         req = Request(instance)
-        res = self.delete(req)
+        res = self._delete(req)
 
         if res.status_code == requests.codes.ok:
             return True
@@ -136,7 +136,7 @@ class Json(OAuthEngine):
         req = Request(instance)
         req.data = json.dumps({enclosure: data})
 
-        res = self.put(req)
+        res = self._put(req)
 
         if res.status_code == requests.codes.ok:
             if auto_update:
@@ -150,7 +150,7 @@ class Json(OAuthEngine):
 
         raise ShopifyException(res)
 
-    def view(self, model, primary_key, auto_instance=True, **params):
+    def fetch(self, model, primary_key=None, auto_instance=True, **params):
         """Get a specific model instance by primary key.
 
         :param Model: The class being queried.
@@ -164,9 +164,13 @@ class Json(OAuthEngine):
 
         req = Request(model)
         req.params = params
-        req.resource += "/{primary_key}".format(primary_key=primary_key)
 
-        res = self.get(req)
+        # Shop is the sole resource not following the same naming
+        # convention for its resource url.
+        if not model.__name__.lower() == "shop":
+            req.resource += "/{primary_key}".format(primary_key=primary_key)
+
+        res = self._get(req)
 
         if res.status_code == requests.codes.ok:
             data = res.json()
@@ -190,7 +194,7 @@ class Json(OAuthEngine):
         req = Request(model)
         req.params = params
 
-        res = self.get(req)
+        res = self._get(req)
 
         if res.status_code == requests.codes.ok:
             if auto_instance:
