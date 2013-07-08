@@ -91,7 +91,7 @@ class JsonEngineTestCase(ShopifyTroisTestCase):
         except InvalidRequestException:
             pass
 
-        data = u'{"test_model": {"name": "test"}}'
+        data = '{"test_model": {"name": "test"}}'
         response = requests.Response()
         response.encoding = encoding
         response._content = data.encode(encoding)
@@ -133,7 +133,7 @@ class JsonEngineTestCase(ShopifyTroisTestCase):
         credentials = Credentials()
         shopify = Shopify(shop_name='test', credentials=credentials)
 
-        data = u'{"test_model": {"id": 1, "name": "test"}}'
+        data = '{"test_model": {"id": 1, "name": "test"}}'
         response = requests.Response()
         response.encoding = encoding
         response._content = data.encode(encoding)
@@ -164,7 +164,7 @@ class JsonEngineTestCase(ShopifyTroisTestCase):
         credentials = Credentials()
         shopify = Shopify(shop_name='test', credentials=credentials)
 
-        data = u'{"test_model": {"id": 1, "name": "test"}}'
+        data = '{"test_model": {"id": 1, "name": "test"}}'
         response = requests.Response()
         response.encoding = encoding
         response._content = data.encode(encoding)
