@@ -80,7 +80,9 @@ class Model():
         else:
             properties = self.properties
 
-        [setattr(self, k, v) for k, v in raw.items() if k in properties]
+        for k, v in raw.items():
+            if k in properties:
+                setattr(self, k, v)
 
     def changes(self):
         missing = object()
