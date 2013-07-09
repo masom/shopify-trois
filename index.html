@@ -1,1 +1,332 @@
-First commit
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Shopify-Trois &mdash; Shopify-Trois 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Shopify-Trois 0.1 documentation" href="#" /> 
+  </head>
+  <body>
+  
+  
+  <div class=indexwrapper>
+  
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="shopify-trois">
+<h1>Shopify-Trois<a class="headerlink" href="#shopify-trois" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Shopify-Trois provides a somewhat loose API to access and modify Shopify
+store resources.</p>
+</div>
+<div class="section" id="links">
+<h2>Links<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://github.com/masom/shopify-trois">source</a></li>
+<li><a class="reference external" href="http://api.shopify.com">Shopify API</a></li>
+</ul>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="api">
+<h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="app-authorization">
+<h2>App Authorization<a class="headerlink" href="#app-authorization" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">shopify_trois</span> <span class="kn">import</span> <span class="n">Credentials</span><span class="p">,</span> <span class="n">Collection</span>
+<span class="kn">from</span> <span class="nn">shopify_trois.models</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">shopify_trois.engines.http.json</span> <span class="kn">import</span> <span class="n">Json</span> <span class="k">as</span> <span class="n">Shopify</span>
+
+<span class="n">credentials</span> <span class="o">=</span> <span class="n">Credentials</span><span class="p">(</span>
+    <span class="n">api_key</span><span class="o">=</span><span class="s">&#39;your api key&#39;</span><span class="p">,</span>
+    <span class="n">scope</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;create_webhooks&#39;</span><span class="p">],</span>
+    <span class="n">secret</span><span class="o">=</span><span class="s">&#39;your api key secret&#39;</span>
+<span class="p">)</span>
+<span class="n">shopify</span> <span class="o">=</span> <span class="n">Shopify</span><span class="p">(</span><span class="n">shop_name</span><span class="o">=</span><span class="s">&quot;your store name&quot;</span><span class="p">,</span> <span class="n">credentials</span><span class="o">=</span><span class="n">credentials</span><span class="p">)</span>
+
+<span class="c"># Redirect the shop owner to the url provided by `shopify.oauth_authorize_url()`</span>
+<span class="c"># print(shopify.oauth_authorize_url())</span>
+<span class="c"># Get the oauth temporary code and set it in the credentials object.</span>
+
+<span class="n">credentials</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="s">&quot;oauth temporary code&quot;</span>
+
+<span class="c"># fetch the access token</span>
+<span class="n">shopify</span><span class="o">.</span><span class="n">setup_access_token</span><span class="p">()</span>
+
+<span class="c"># credentials.oauth_access_token will contain the access token. It would be a good idea to save it somewhere.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="client-setup-once-authorized">
+<h2>Client Setup Once Authorized<a class="headerlink" href="#client-setup-once-authorized" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">credentials</span> <span class="o">=</span> <span class="n">Credentials</span><span class="p">(</span>
+    <span class="n">api_key</span><span class="o">=</span><span class="s">&#39;your api key&#39;</span><span class="p">,</span>
+    <span class="n">scope</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;read_orders&#39;</span><span class="p">],</span>
+    <span class="n">secret</span><span class="o">=</span><span class="s">&#39;your app secret&#39;</span><span class="p">,</span>
+    <span class="n">oauth_access_token</span><span class="o">=</span><span class="s">&quot;your access token&quot;</span>
+<span class="p">)</span>
+
+<span class="n">shopify</span> <span class="o">=</span> <span class="n">Shopify</span><span class="p">(</span><span class="n">shop_name</span><span class="o">=</span><span class="s">&quot;your store name&quot;</span><span class="p">,</span> <span class="n">credentials</span><span class="o">=</span><span class="n">credentials</span><span class="p">)</span>
+
+<span class="c"># The client is now ready to communicate with Shopify</span>
+<span class="n">shopify</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">Shop</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="working-with-data">
+<h2>Working With Data<a class="headerlink" href="#working-with-data" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Fetch the store information</span>
+<span class="n">shop</span> <span class="o">=</span> <span class="n">shopify</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">Shop</span><span class="p">)</span>
+
+<span class="c"># Set the shop as public</span>
+<span class="n">shop</span><span class="o">.</span><span class="n">public</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="c"># Calling changes() on a model instance will show the modified properties.</span>
+<span class="k">print</span><span class="p">(</span><span class="n">shop</span><span class="o">.</span><span class="n">changes</span><span class="p">())</span>
+
+<span class="n">webhook</span> <span class="o">=</span> <span class="n">Webhook</span><span class="p">()</span>
+<span class="n">webhook</span><span class="o">.</span><span class="n">address</span> <span class="o">=</span> <span class="s">&quot;http://www.google.ca&quot;</span>
+<span class="n">webhook</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="s">&quot;json&quot;</span>
+<span class="n">webhook</span><span class="o">.</span><span class="n">topic</span> <span class="o">=</span> <span class="s">&quot;orders/create&quot;</span>
+
+<span class="c"># Create the webhook</span>
+<span class="n">shopify</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">webhook</span><span class="p">)</span>
+
+<span class="c"># Get all the webhooks and iterates them</span>
+<span class="n">webhooks</span> <span class="o">=</span> <span class="n">shopify</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">Webhook</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">webhook</span> <span class="ow">in</span> <span class="n">webhooks</span><span class="p">:</span>
+    <span class="c"># webhook is a Webhook instance, created by iterating the Collection</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">webhook</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="relationships">
+<h2>Relationships<a class="headerlink" href="#relationships" title="Permalink to this headline">¶</a></h2>
+<p>Shopify-Trois has basic entity relationship support.
+Some entities have been marked as subresources of another.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">shopify</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">ProductVariant</span><span class="p">,</span> <span class="n">parent_id</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">variant</span> <span class="o">=</span> <span class="n">ProductVariant</span><span class="p">(</span><span class="n">product_id</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">shopify</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">variant</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="shopify_trois.engines.http.json.Json">
+<em class="property">class </em><tt class="descclassname">shopify_trois.engines.http.json.</tt><tt class="descname">Json</tt><big>(</big><em>shop_name</em>, <em>credentials</em>, <em>ignore_supported=False</em>, <em>ignore_model_properties=False</em><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.json.Json" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Json engine implements an http transport using JSON with OAuth
+authentication.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>shop_name</strong> &#8211; The name of the shopify store.</li>
+<li><strong>credentials</strong> &#8211; <tt class="xref py py-class docutils literal"><span class="pre">Credential</span></tt></li>
+<li><strong>ignore_supported</strong> &#8211; When set to True, the engine will ignore
+the <tt class="docutils literal"><span class="pre">supported</span></tt> property of the models.</li>
+<li><strong>ignore_model_properties</strong> &#8211; When set to True, the engine will
+ignore the <tt class="docutils literal"><span class="pre">properties</span></tt> property of
+models when persisting them.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="shopify_trois.engines.http.json.Json.add">
+<tt class="descname">add</tt><big>(</big><em>instance</em>, <em>auto_update=True</em><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.json.Json.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the model instance to the store.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>instance</strong> &#8211; The model instance being added.</li>
+<li><strong>auto_update</strong> &#8211; Auto-update the instance with the values from
+Shopify. When set to false, the raw JSON object
+will be returned.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.engines.http.json.Json.authorize_app_url">
+<tt class="descname">authorize_app_url</tt><big>(</big><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.json.Json.authorize_app_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the oauth authorization url.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.engines.http.json.Json.count">
+<tt class="descname">count</tt><big>(</big><em>model</em>, <em>**params</em><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.json.Json.count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the count of a model, filtered by parameters</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.engines.http.json.Json.custom_post">
+<tt class="descname">custom_post</tt><big>(</big><em>instance</em>, <em>action</em>, <em>data=None</em><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.json.Json.custom_post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes a custom post method on an instance.
+:param instance: The model instance being modified.
+:param action: The action to be executed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.engines.http.json.Json.delete">
+<tt class="descname">delete</tt><big>(</big><em>instance</em><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.json.Json.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a model instance.</p>
+<p>An InvalidRequestException will be raised if the instance does not yet
+exists.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>instance</strong> &#8211; The model instance to remove.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.engines.http.json.Json.fetch">
+<tt class="descname">fetch</tt><big>(</big><em>model</em>, <em>primary_key=None</em>, <em>auto_instance=True</em>, <em>**params</em><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.json.Json.fetch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a specific model instance by primary key.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>Model</strong> &#8211; The class being queried.</li>
+<li><strong>primary_key</strong> &#8211; The primary key value of the instance.</li>
+<li><strong>auto_instance</strong> &#8211; Automatically create an instance instead of
+returning a json object.</li>
+<li><strong>params</strong> &#8211; Query parameters.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.engines.http.json.Json.ignore_supported">
+<tt class="descname">ignore_supported</tt><em class="property"> = None</em><a class="headerlink" href="#shopify_trois.engines.http.json.Json.ignore_supported" title="Permalink to this definition">¶</a></dt>
+<dd><p>When set to True, ignore checking for supported actions on models.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.engines.http.json.Json.index">
+<tt class="descname">index</tt><big>(</big><em>model</em>, <em>auto_instance=True</em>, <em>**params</em><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.json.Json.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch the index for a given model and supplied parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>model</strong> &#8211; The model being queried.</li>
+<li><strong>options</strong> &#8211; Query parameters (see shopify documentation)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.engines.http.json.Json.oauth_access_token">
+<tt class="descname">oauth_access_token</tt><big>(</big><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.json.Json.oauth_access_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch the OAuth access token from shopify.</p>
+<p><tt class="xref py py-meth docutils literal"><span class="pre">setup_access_token()</span></tt> should be used.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.engines.http.json.Json.setup_access_token">
+<tt class="descname">setup_access_token</tt><big>(</big><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.json.Json.setup_access_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility function wrapping getting the oauth token and setting
+the credential values.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.engines.http.json.Json.update">
+<tt class="descname">update</tt><big>(</big><em>instance</em>, <em>auto_update=True</em>, <em>whitelist=None</em><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.json.Json.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update a model instance.</p>
+<p>An InvalidRequestException will be raised if the instance has not been
+marked as existing.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>instance</strong> &#8211; The model instance being updated.</li>
+<li><strong>auto_update</strong> &#8211; Auto-update the instance with the values from
+Shopify. When set to False, the raw JSON object
+will be returned.</li>
+<li><strong>whitelist</strong> &#8211; A list of attributes to be updated. If set to None,
+all modified attributes will be updated.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <a href="http://github.com/masom/shopify-trois"><img style="position: fixed; top: 0; right: 0; border: 0;"
+    src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+  
+
+  
+  </div>
+  
+
+  </body>
+</html>
