@@ -3,6 +3,13 @@ Shopify-Trois Changelog
 
 Here you can see the full list of changes between each Shopify-Trois release.
 
+Version 0.4
+-----------
+
+Released on July 9th 2013, codename Mocha
+
+- Added signature verification to the oauth engine.
+- Updated documentation
 
 Version 0.3
 -----------
