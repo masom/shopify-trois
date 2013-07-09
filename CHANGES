@@ -3,6 +3,19 @@ Shopify-Trois Changelog
 
 Here you can see the full list of changes between each Shopify-Trois release.
 
+
+Version 0.3
+-----------
+
+Released on July 8th 2013, codename Decaf
+
+- Updated relationship api.
+- Added most Shopify models.
+- Json engine methods now return objects unless told not to.
+- Json engine index method now automatically return a Collection
+- Several bug fixes
+- 100% test coverage.
+
 Version 0.2
 -----------
 
