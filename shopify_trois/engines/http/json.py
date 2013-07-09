@@ -225,8 +225,7 @@ class Json(OAuthEngine):
 
         self._can_request("index", model)
 
-        req = Request(model)
-        req.params = params
+        req = Request(model, **params)
 
         res = self._get(req)
 

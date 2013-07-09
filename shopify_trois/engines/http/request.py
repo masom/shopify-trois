@@ -13,13 +13,13 @@ from shopify_trois.exceptions import ShopifyException
 
 
 class Request:
-    def __init__(self, model=None):
+    def __init__(self, model=None, **params):
         self.__headers = {}
 
         '''
         HTTP parameters.
         '''
-        self.params = None
+        self.params = params or None
 
         '''
         Relative path from the base api.
@@ -60,15 +60,14 @@ class Request:
         return "/%s" % resource
 
     def _generate_subresource_for_model(self, model, resource, is_instance):
-            parent = model.is_subresource_of
+        parent = model.is_subresource_of
+        parent_id = None
 
-            if is_instance:
-                parent_pk = "{name}_{pk}".format(
-                    name=parent.__name__.lower(),
-                    pk=parent.primary_key
-                )
-            else:
-                parent_pk = "parent_id"
+        if is_instance:
+            parent_pk = "{name}_{pk}".format(
+                name=parent.__name__.lower(),
+                pk=parent.primary_key
+            )
 
             if not hasattr(model, parent_pk):
                 raise ShopifyException(
@@ -77,14 +76,19 @@ class Request:
 
             parent_id = getattr(model, parent_pk)
 
-            if parent_id is None:
-                raise ShopifyException(
-                    "Missing parent primary key `%s`." % parent_pk
-                )
+        else:
+            parent_pk = "parent_id"
+            if self.params:
+                parent_id = self.params.pop("parent_id", None)
 
-            resource = "{parent}/{parent_id}/{resource}".format(
-                parent=parent.resource,
-                parent_id=parent_id,
-                resource=model.resource
+        if parent_id is None:
+            raise ShopifyException(
+                "Missing parent primary key `%s`." % (parent_pk,)
             )
-            return resource
+
+        resource = "{parent}/{parent_id}/{resource}".format(
+            parent=parent.resource,
+            parent_id=parent_id,
+            resource=model.resource
+        )
+        return resource

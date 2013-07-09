@@ -58,9 +58,9 @@ class RequestTestCase(ShopifyTroisTestCase):
 
         # This should fail due to not having a parent_id value
         # set on the class
-        r = Request()
         try:
-            result = r.generate_resource_for_model(TestSubModel)
+            r = Request(TestSubModel)
+            result = r.generate_resource_for_model()
             self.fail("A resource location should not have been generated."
                       " `%s` " % result)
         except ShopifyException:
@@ -70,19 +70,19 @@ class RequestTestCase(ShopifyTroisTestCase):
         # set on the instance
         m = TestSubModel()
         try:
-            result = r.generate_resource_for_model(m)
+            r = Request(m)
+            result = r.generate_resource_for_model()
             self.fail()
         except ShopifyException:
             pass
 
-        TestSubModel.parent_id = 2
-        result = r.generate_resource_for_model(TestSubModel)
-        self.assertEquals(result, '/test/2/test')
+        r = Request(TestSubModel, parent_id=2)
+        self.assertEquals(r.resource, '/test/2/test')
 
         m.testmodel_id = 1
-        result = r.generate_resource_for_model(m)
-        self.assertEquals(result, '/test/1/test')
+        r = Request(m)
+        self.assertEquals(r.resource, '/test/1/test')
 
         m.id = 3
-        result = r.generate_resource_for_model(m)
-        self.assertEquals(result, '/test/1/test/3')
+        r = Request(m)
+        self.assertEquals(r.resource, '/test/1/test/3')
