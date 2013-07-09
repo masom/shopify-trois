@@ -2,6 +2,7 @@ from ... import ShopifyTroisTestCase
 
 import requests
 import mock
+import json
 
 from shopify_trois.exceptions import InvalidRequestException, ShopifyException
 from shopify_trois import Credentials, Collection
@@ -12,7 +13,9 @@ from shopify_trois.models.model import Model
 
 class TestModel(Model):
     resource = "test_models"
-    supported = ['update', 'view', 'create', 'index', 'delete']
+    supported = [
+        'update', 'view', 'create', 'index', 'delete', "count", "/custom"
+    ]
     properties = ['id', 'name']
 
 
@@ -186,6 +189,60 @@ class JsonEngineTestCase(ShopifyTroisTestCase):
             response.status_code = 404
             shopify.session.get = mock.Mock(return_value=response)
             result = shopify.fetch(TestModel, 2)
+            self.fail()
+        except ShopifyException:
+            pass
+
+    def test_count(self):
+        encoding = 'UTF-8'
+        credentials = Credentials()
+        shopify = Shopify(shop_name='test', credentials=credentials)
+
+        data = '{"count": 2}'
+        response = requests.Response()
+        response.encoding = encoding
+        response._content = data.encode(encoding)
+        response.status_code = 200
+
+        shopify.session.get = mock.Mock(return_value=response)
+
+        result = shopify.count(TestModel)
+        self.assertEquals(result, 2)
+
+        try:
+            response = requests.Response()
+            response.encoding = encoding
+            response._content = data.encode(encoding)
+            response.status_code = 404
+            shopify.session.get = mock.Mock(return_value=response)
+            result = shopify.count(TestModel)
+            self.fail()
+        except ShopifyException:
+            pass
+
+    def test_custom_post(self):
+        encoding = 'UTF-8'
+        credentials = Credentials()
+        shopify = Shopify(shop_name='test', credentials=credentials)
+
+        data = '{"test_model": {"id": 1, "name": "test"}}'
+        response = requests.Response()
+        response.encoding = encoding
+        response._content = data.encode(encoding)
+        response.status_code = 200
+
+        shopify.session.post = mock.Mock(return_value=response)
+        result = shopify.custom_post(TestModel, "/custom")
+        self.assertEquals(result, json.loads(data))
+
+        instance = TestModel(id="test")
+        try:
+            response = requests.Response()
+            response.encoding = encoding
+            response._content = data.encode(encoding)
+            response.status_code = 404
+            shopify.session.post = mock.Mock(return_value=response)
+            shopify.custom_post(instance, "/custom")
             self.fail()
         except ShopifyException:
             pass

@@ -2,7 +2,7 @@
 """
     shopify_trois.models.order
 
-    Shopify-Trois Orders
+    Shopify-Trois Order
 
     :copyright: (c) 2013 by Martin Samson
     :license: MIT, see LICENSE for more details.

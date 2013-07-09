@@ -41,6 +41,40 @@ class Json(OAuthEngine):
         self.ignore_supported = ignore_supported
         self.ignore_model_properties = ignore_model_properties
 
+    def count(self, model, **params):
+        """Return the count of a model, filtered by parameters"""
+
+        self._can_request("count", model)
+
+        req = Request(model)
+        req.resource += "/count"
+        req.params = params
+
+        res = self._get(req)
+        if res.status_code == requests.codes.ok:
+            data = res.json()
+            return data["count"]
+
+        raise ShopifyException(res)
+
+    def custom_post(self, instance, action, data=None):
+        """Executes a custom post method on an instance.
+        :param instance: The model instance being modified.
+        :param action: The action to be executed.
+        """
+
+        self._can_request(action, instance)
+
+        req = Request(instance)
+        req.resource += action
+        req.data = data
+
+        res = self._post(req)
+        if res.status_code == requests.codes.ok:
+            return res.json()
+
+        raise ShopifyException(res)
+
     def add(self, instance, auto_update=True):
         """Add the model instance to the store.
 
@@ -54,7 +88,7 @@ class Json(OAuthEngine):
 
         req = Request(instance)
 
-        enclosure = instance.to_underscore_name()
+        enclosure = instance.enclosure or instance.to_underscore_name()
 
         if self.ignore_model_properties:
             data = instance.to_dict()
@@ -123,7 +157,7 @@ class Json(OAuthEngine):
             msg = "The supplied instance does not yet exists."
             raise InvalidRequestException(msg)
 
-        enclosure = instance.to_underscore_name()
+        enclosure = instance.enclosure or instance.to_underscore_name()
 
         if self.ignore_model_properties:
             data = instance.to_dict()
@@ -175,7 +209,7 @@ class Json(OAuthEngine):
         if res.status_code == requests.codes.ok:
             data = res.json()
             if auto_instance:
-                enclosure = model.to_underscore_name()
+                enclosure = model.enclosure or model.to_underscore_name()
                 return model(**data[enclosure])
             else:
                 return data

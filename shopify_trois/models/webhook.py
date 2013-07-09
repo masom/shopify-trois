@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-    shopify_trois.models.shop
+    shopify_trois.models.webhook
 
     Shopify-Trois Webhook
 

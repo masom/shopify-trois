@@ -33,6 +33,9 @@ class Model():
     """Holds the model parent id value. Used with :attr:`is_subresource_of`."""
     parent_id = None
 
+    """Holds the data enclosure name if not normalized."""
+    enclosure = None
+
     """List of supported actions on the resource."""
     supported = []
 

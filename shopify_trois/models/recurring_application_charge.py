@@ -9,7 +9,6 @@
 """
 
 from .model import Model
-from .order import Order
 
 
 class RecurringApplicationCharge(Model):
