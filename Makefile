@@ -4,13 +4,13 @@ test:
 
 gh-pages:
 	git checkout gh-pages
-	rm -rf build docs/_sources docs/_static
 	git checkout master $(GH_PAGES_SOURCES) docs
 	git reset HEAD
+	rm -rf build _sources _static
 	python setup.py install
 	cd docs/ && make html
 	cd ..
 	mv -fv docs/_build/html/* ./
-	rm -rf $(GH_PAGES_SOURCES)
+	rm -rf $(GH_PAGES_SOURCES) docs dist build shopify_trois.egg-info
 	git add -A
 	git commit -m "Generated gh-pages for `git log master -1 --pretty=short --abbrev-commit`" && git push origin gh-pages ; git checkout master
