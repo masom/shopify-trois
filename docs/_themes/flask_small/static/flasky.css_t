@@ -251,10 +251,14 @@ dl {
     padding: 0;
 }
 
+dl.class {
+    margin-bottom: 40px;
+}
+
 dl dd {
     margin-left: 30px;
 }
- 
+
 pre {
     padding: 0;
     margin: 15px -30px;
@@ -271,6 +275,7 @@ dl pre {
     margin-left: -60px;
     padding-left: 60px;
 }
+
 
 tt {
     background-color: #ecf0f3;

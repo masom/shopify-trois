@@ -1,9 +1,3 @@
-.. Shopify-Trois documentation master file, created by
-   sphinx-quickstart on Thu Jul  4 14:14:16 2013.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-
 Shopify-Trois
 ===============
 
@@ -18,12 +12,13 @@ Links
 * `source <http://github.com/masom/shopify-trois>`_
 * `Shopify API <http://api.shopify.com>`_
 
+Docs
+----
+.. toctree::
+   :maxdepth: 2
 
-Example
--------
-.. code-block:: python
-
-
+   models
+   engines
 
 API
 ===
@@ -117,6 +112,7 @@ Classes
 
 .. autoclass:: shopify_trois.engines.http.json.Json
     :members:
+    :inherited-members:
 
 .. autoclass:: shopify_trois.credentials.Credentials
     :members:
@@ -128,5 +124,4 @@ Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`

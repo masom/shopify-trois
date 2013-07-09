@@ -104,8 +104,8 @@ class OAuthEngine():
                     credentials)
 
             query_parameters = parse_qsl("code=238420989938cb70a609f6ece2e2586\
-                    b&shop=yourstore.myshopify.com&timestamp=1373382939&\
-                    signature=6fb122e33c21851c465345b8cb97245e")
+b&shop=yourstore.myshopify.com&timestamp=1373382939&\
+signature=6fb122e33c21851c465345b8cb97245e")
 
             if not shopify.verify_signature(query_parameters):
                 raise Exception("invalid signature")

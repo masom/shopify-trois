@@ -19,28 +19,26 @@ class Meta():
 class Model():
     """Base model class for all Shopify resources."""
 
-    """Resource name.
-    Maps to a database table name, URL resource name, etc.
-    """
-    resource = ''
-
-    """The model primary key."""
-    primary_key = "id"
-
-    """Mark the model as being a subresource of another."""
-    is_subresource_of = None
-
-    """Holds the model parent id value. Used with :attr:`is_subresource_of`."""
-    parent_id = None
-
-    """Holds the data enclosure name if not normalized."""
+    #: Holds the data enclosure name if not normalized.
     enclosure = None
 
-    """List of supported actions on the resource."""
-    supported = []
+    #: Mark the model as being a subresource of another.
+    is_subresource_of = None
 
-    """List of properties expoded by the api."""
+    #: Holds the model parent id value. Used with :attr:`is_subresource_of`.
+    parent_id = None
+
+    #: The model primary key.
+    primary_key = "id"
+
+    #: List of properties expoded by the api.
     properties = []
+
+    #: The shopify url resource.
+    resource = ''
+
+    #: List of supported actions on the resource.
+    supported = []
 
     def __init__(self, *args, **kwargs):
 

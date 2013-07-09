@@ -42,7 +42,20 @@ class Json(OAuthEngine):
         self.ignore_model_properties = ignore_model_properties
 
     def count(self, model, **params):
-        """Return the count of a model, filtered by parameters"""
+        """Return the count of a model, filtered by parameters
+
+        example usage::
+
+            from shopify_trois.engines.http import Json as Shopify
+            from shopify_trois import Credentials
+            from shopify_trois.models import Blog
+
+            credentials = Credentials(...)
+            shopify = Shopify(store_name="test", credentials=credentials)
+
+            blogs = shopify.count(Blog)
+
+        """
 
         self._can_request("count", model)
 
@@ -82,6 +95,19 @@ class Json(OAuthEngine):
         :param auto_update: Auto-update the instance with the values from
                             Shopify. When set to false, the raw JSON object
                             will be returned.
+
+        example usage:
+
+            from shopify_trois.engines.http import Json as Shopify
+            from shopify_trois import Credentials
+            from shopify_trois.models import Blog
+
+            credentials = Credentials(...)
+            shopify = Shopify(store_name="test", credentials=credentials)
+
+            blog = Blog(title="Awesome")
+            shopify.add(blog)
+
         """
 
         self._can_request("create", instance)
@@ -121,6 +147,19 @@ class Json(OAuthEngine):
         exists.
 
         :param instance: The model instance to remove.
+
+        example usage:
+
+            from shopify_trois.engines.http import Json as Shopify
+            from shopify_trois import Credentials
+            from shopify_trois.models import Blog
+
+            credentials = Credentials(...)
+            shopify = Shopify(store_name="test", credentials=credentials)
+
+            blog = Blog(id=3)
+            shopify.delete(blog)
+
         """
 
         self._can_request("delete", instance)
@@ -137,7 +176,7 @@ class Json(OAuthEngine):
 
         raise ShopifyException(res)
 
-    def update(self, instance, auto_update=True, whitelist=None):
+    def update(self, instance, auto_update=True):
         """Update a model instance.
 
         An InvalidRequestException will be raised if the instance has not been
@@ -147,8 +186,20 @@ class Json(OAuthEngine):
         :param auto_update: Auto-update the instance with the values from
                             Shopify. When set to False, the raw JSON object
                             will be returned.
-        :param whitelist: A list of attributes to be updated. If set to None,
-                          all modified attributes will be updated.
+
+        example usage:
+
+            from shopify_trois.engines.http import Json as Shopify
+            from shopify_trois import Credentials
+            from shopify_trois.models import Blog
+
+            credentials = Credentials(...)
+            shopify = Shopify(store_name="test", credentials=credentials)
+
+            blog = shopify.fetch(Blog, 4)
+            blog.commentable = False
+            shopify.update(blog)
+
         """
 
         self._can_request("update", instance)
@@ -192,6 +243,18 @@ class Json(OAuthEngine):
         :param auto_instance: Automatically create an instance instead of
                               returning a json object.
         :param params: Query parameters.
+
+        example usage:
+
+            from shopify_trois.engines.http import Json as Shopify
+            from shopify_trois import Credentials
+            from shopify_trois.models import Blog
+
+            credentials = Credentials(...)
+            shopify = Shopify(store_name="test", credentials=credentials)
+
+            blog = shopify.fetch(Blog, 2)
+
         """
 
         self._can_request("view", model)
@@ -220,7 +283,23 @@ class Json(OAuthEngine):
         """Fetch the index for a given model and supplied parameters.
 
         :param model: The model being queried.
-        :param options: Query parameters (see shopify documentation)
+        :param auto_instance: Automatically create a Collection instance
+                              instead of returning a json object.
+        :param params: Query parameters (see shopify documentation)
+
+        example usage:
+
+            from shopify_trois.engines.http import Json as Shopify
+            from shopify_trois import Credentials
+            from shopify_trois.models import Blog
+
+            credentials = Credentials(...)
+            shopify = Shopify(store_name="test", credentials=credentials)
+
+            blogs = shopify.index(Blog)
+            for blog in blogs:
+                print(blog.to_dict())
+
         """
 
         self._can_request("index", model)
