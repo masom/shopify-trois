@@ -1,11 +1,6 @@
 Shopify-Trois
 ===============
 
-Introduction
-------------
-Shopify-Trois provides a somewhat loose API to access and modify Shopify
-store resources.
-
 Links
 -----
 
@@ -29,7 +24,7 @@ App Authorization
 
     from shopify_trois import Credentials, Collection
     from shopify_trois.models import *
-    from shopify_trois.engines.http.json import Json as Shopify
+    from shopify_trois.engines.http import Json as Shopify
 
     credentials = Credentials(
         api_key='your api key',

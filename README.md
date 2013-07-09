@@ -1,4 +1,4 @@
-Shopify API for Python 3.3
+The __awesome__ shopify api client for Python 3.3
 
 [![Build Status](https://travis-ci.org/masom/shopify-trois.png?branch=master)](https://travis-ci.org/masom/shopify-trois)
 
@@ -7,7 +7,6 @@ Shopify API for Python 3.3
 #Installation
 
     pip install shopify-trois
-
 
 
 #Usage
