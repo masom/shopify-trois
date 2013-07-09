@@ -112,9 +112,17 @@ Some entities have been marked as subresources of another.
     variant = ProductVariant(product_id=2)
     shopify.fetch(variant)
 
+Classes
+----------
+
 .. autoclass:: shopify_trois.engines.http.json.Json
     :members:
 
+.. autoclass:: shopify_trois.credentials.Credentials
+    :members:
+
+.. autoclass:: shopify_trois.collection.Collection
+    :members:
 
 Indices and tables
 ==================
