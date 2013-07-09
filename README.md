@@ -2,6 +2,14 @@ Shopify API for Python 3.3
 
 [![Build Status](https://travis-ci.org/masom/shopify-trois.png?branch=master)](https://travis-ci.org/masom/shopify-trois)
 
+[Documentation](http://masom.github.io/shopify-trois/ "Documentation")
+
+#Installation
+
+    pip install shopify-trois
+
+
+
 #Usage
 
 ## Authorization
