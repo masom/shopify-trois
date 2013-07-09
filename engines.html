@@ -1,0 +1,360 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Engines &mdash; Shopify-Trois 0.3 documentation</title>
+    
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Shopify-Trois 0.3 documentation" href="index.html" />
+    <link rel="prev" title="Models" href="models.html" /> 
+  </head>
+  <body>
+  
+  
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-shopify_trois.engines.http">
+<span id="engines"></span><h1>Engines<a class="headerlink" href="#module-shopify_trois.engines.http" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="shopify_trois.engines.http.Json">
+<em class="property">class </em><tt class="descclassname">shopify_trois.engines.http.</tt><tt class="descname">Json</tt><big>(</big><em>shop_name</em>, <em>credentials</em>, <em>ignore_supported=False</em>, <em>ignore_model_properties=False</em><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.Json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.engines.http.oauth_engine.OAuthEngine</span></tt></p>
+<p>The Json engine implements an http transport using JSON with OAuth
+authentication.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>shop_name</strong> &#8211; The name of the shopify store.</li>
+<li><strong>credentials</strong> &#8211; <tt class="xref py py-class docutils literal"><span class="pre">Credential</span></tt></li>
+<li><strong>ignore_supported</strong> &#8211; When set to True, the engine will ignore
+the <tt class="docutils literal"><span class="pre">supported</span></tt> property of the models.</li>
+<li><strong>ignore_model_properties</strong> &#8211; When set to True, the engine will
+ignore the <tt class="docutils literal"><span class="pre">properties</span></tt> property of
+models when persisting them.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="shopify_trois.engines.http.Json.add">
+<tt class="descname">add</tt><big>(</big><em>instance</em>, <em>auto_update=True</em><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.Json.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the model instance to the store.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>instance</strong> &#8211; The model instance being added.</li>
+<li><strong>auto_update</strong> &#8211; Auto-update the instance with the values from
+Shopify. When set to false, the raw JSON object
+will be returned.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>example usage:</p>
+<blockquote>
+<div><p>from shopify_trois.engines.http import Json as Shopify
+from shopify_trois import Credentials
+from shopify_trois.models import Blog</p>
+<p>credentials = Credentials(...)
+shopify = Shopify(store_name=&#8221;test&#8221;, credentials=credentials)</p>
+<p>blog = Blog(title=&#8221;Awesome&#8221;)
+shopify.add(blog)</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.engines.http.Json.authorize_app_url">
+<tt class="descname">authorize_app_url</tt><big>(</big><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.Json.authorize_app_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the oauth authorization url.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.engines.http.Json.count">
+<tt class="descname">count</tt><big>(</big><em>model</em>, <em>**params</em><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.Json.count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the count of a model, filtered by parameters</p>
+<p>example usage:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">shopify_trois.engines.http</span> <span class="kn">import</span> <span class="n">Json</span> <span class="k">as</span> <span class="n">Shopify</span>
+<span class="kn">from</span> <span class="nn">shopify_trois</span> <span class="kn">import</span> <span class="n">Credentials</span>
+<span class="kn">from</span> <span class="nn">shopify_trois.models</span> <span class="kn">import</span> <span class="n">Blog</span>
+
+<span class="n">credentials</span> <span class="o">=</span> <span class="n">Credentials</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">shopify</span> <span class="o">=</span> <span class="n">Shopify</span><span class="p">(</span><span class="n">store_name</span><span class="o">=</span><span class="s">&quot;test&quot;</span><span class="p">,</span> <span class="n">credentials</span><span class="o">=</span><span class="n">credentials</span><span class="p">)</span>
+
+<span class="n">blogs</span> <span class="o">=</span> <span class="n">shopify</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">Blog</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.engines.http.Json.custom_post">
+<tt class="descname">custom_post</tt><big>(</big><em>instance</em>, <em>action</em>, <em>data=None</em><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.Json.custom_post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes a custom post method on an instance.
+:param instance: The model instance being modified.
+:param action: The action to be executed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.engines.http.Json.delete">
+<tt class="descname">delete</tt><big>(</big><em>instance</em><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.Json.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a model instance.</p>
+<p>An InvalidRequestException will be raised if the instance does not yet
+exists.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>instance</strong> &#8211; The model instance to remove.</td>
+</tr>
+</tbody>
+</table>
+<p>example usage:</p>
+<blockquote>
+<div><p>from shopify_trois.engines.http import Json as Shopify
+from shopify_trois import Credentials
+from shopify_trois.models import Blog</p>
+<p>credentials = Credentials(...)
+shopify = Shopify(store_name=&#8221;test&#8221;, credentials=credentials)</p>
+<p>blog = Blog(id=3)
+shopify.delete(blog)</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.engines.http.Json.extension">
+<tt class="descname">extension</tt><em class="property"> = 'json'</em><a class="headerlink" href="#shopify_trois.engines.http.Json.extension" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.engines.http.Json.fetch">
+<tt class="descname">fetch</tt><big>(</big><em>model</em>, <em>primary_key=None</em>, <em>auto_instance=True</em>, <em>**params</em><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.Json.fetch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a specific model instance by primary key.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>Model</strong> &#8211; The class being queried.</li>
+<li><strong>primary_key</strong> &#8211; The primary key value of the instance.</li>
+<li><strong>auto_instance</strong> &#8211; Automatically create an instance instead of
+returning a json object.</li>
+<li><strong>params</strong> &#8211; Query parameters.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>example usage:</p>
+<blockquote>
+<div><p>from shopify_trois.engines.http import Json as Shopify
+from shopify_trois import Credentials
+from shopify_trois.models import Blog</p>
+<p>credentials = Credentials(...)
+shopify = Shopify(store_name=&#8221;test&#8221;, credentials=credentials)</p>
+<p>blog = shopify.fetch(Blog, 2)</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.engines.http.Json.index">
+<tt class="descname">index</tt><big>(</big><em>model</em>, <em>auto_instance=True</em>, <em>**params</em><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.Json.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch the index for a given model and supplied parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>model</strong> &#8211; The model being queried.</li>
+<li><strong>auto_instance</strong> &#8211; Automatically create a Collection instance
+instead of returning a json object.</li>
+<li><strong>params</strong> &#8211; Query parameters (see shopify documentation)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>example usage:</p>
+<blockquote>
+<div><p>from shopify_trois.engines.http import Json as Shopify
+from shopify_trois import Credentials
+from shopify_trois.models import Blog</p>
+<p>credentials = Credentials(...)
+shopify = Shopify(store_name=&#8221;test&#8221;, credentials=credentials)</p>
+<p>blogs = shopify.index(Blog)
+for blog in blogs:</p>
+<blockquote>
+<div>print(blog.to_dict())</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.engines.http.Json.mime">
+<tt class="descname">mime</tt><em class="property"> = 'application/json; charset=utf-8'</em><a class="headerlink" href="#shopify_trois.engines.http.Json.mime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.engines.http.Json.oauth_access_token">
+<tt class="descname">oauth_access_token</tt><big>(</big><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.Json.oauth_access_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch the OAuth access token from shopify.</p>
+<p><a class="reference internal" href="#shopify_trois.engines.http.Json.setup_access_token" title="shopify_trois.engines.http.Json.setup_access_token"><tt class="xref py py-meth docutils literal"><span class="pre">setup_access_token()</span></tt></a> should be used.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.engines.http.Json.oauth_access_token_url">
+<tt class="descname">oauth_access_token_url</tt><big>(</big><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.Json.oauth_access_token_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate the OAuth access token url.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.engines.http.Json.oauth_authorize_url">
+<tt class="descname">oauth_authorize_url</tt><big>(</big><em>redirect_to=None</em><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.Json.oauth_authorize_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the oauth authorize url.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>redirect_to</strong> &#8211; URL shopify will redirect to once authorized.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.engines.http.Json.setup_access_token">
+<tt class="descname">setup_access_token</tt><big>(</big><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.Json.setup_access_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility function wrapping getting the oauth token and setting
+the credential values.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.engines.http.Json.update">
+<tt class="descname">update</tt><big>(</big><em>instance</em>, <em>auto_update=True</em><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.Json.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update a model instance.</p>
+<p>An InvalidRequestException will be raised if the instance has not been
+marked as existing.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>instance</strong> &#8211; The model instance being updated.</li>
+<li><strong>auto_update</strong> &#8211; Auto-update the instance with the values from
+Shopify. When set to False, the raw JSON object
+will be returned.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>example usage:</p>
+<blockquote>
+<div><p>from shopify_trois.engines.http import Json as Shopify
+from shopify_trois import Credentials
+from shopify_trois.models import Blog</p>
+<p>credentials = Credentials(...)
+shopify = Shopify(store_name=&#8221;test&#8221;, credentials=credentials)</p>
+<p>blog = shopify.fetch(Blog, 4)
+blog.commentable = False
+shopify.update(blog)</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.engines.http.Json.url_for_request">
+<tt class="descname">url_for_request</tt><big>(</big><em>req</em><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.Json.url_for_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the url for the provided request.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>req</strong> &#8211; See <tt class="xref py py-class docutils literal"><span class="pre">Request</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.engines.http.Json.verify_signature">
+<tt class="descname">verify_signature</tt><big>(</big><em>query_parameters</em><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.Json.verify_signature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verify the signature provided with the query parameters.</p>
+<p><a class="reference external" href="http://docs.shopify.com/api/tutorials/oauth">http://docs.shopify.com/api/tutorials/oauth</a></p>
+<p>example usage:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">shopify_trois</span> <span class="kn">import</span> <span class="n">Credentials</span>
+<span class="kn">from</span> <span class="nn">shopify_trois.engines</span> <span class="kn">import</span> <span class="n">Json</span> <span class="k">as</span> <span class="n">Shopify</span>
+<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">parse_qsl</span>
+
+<span class="n">credentials</span> <span class="o">=</span> <span class="n">Credentials</span><span class="p">(</span>
+    <span class="n">api_key</span><span class="o">=</span><span class="s">&#39;your_api_key&#39;</span><span class="p">,</span>
+    <span class="n">scope</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;read_orders&#39;</span><span class="p">],</span>
+    <span class="n">secret</span><span class="o">=</span><span class="s">&#39;your_app_secret&#39;</span>
+<span class="p">)</span>
+
+<span class="n">shopify</span> <span class="o">=</span> <span class="n">Shopify</span><span class="p">(</span><span class="n">shop_name</span><span class="o">=</span><span class="s">&quot;your_store_name&quot;</span><span class="p">,</span> <span class="n">credentials</span><span class="o">=</span>                    <span class="n">credentials</span><span class="p">)</span>
+
+<span class="n">query_parameters</span> <span class="o">=</span> <span class="n">parse_qsl</span><span class="p">(</span><span class="s">&quot;code=238420989938cb70a609f6ece2e2586b&amp;shop=yourstore.myshopify.com&amp;timestamp=1373382939&amp;signature=6fb122e33c21851c465345b8cb97245e&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">shopify</span><span class="o">.</span><span class="n">verify_signature</span><span class="p">(</span><span class="n">query_parameters</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;invalid signature&quot;</span><span class="p">)</span>
+
+<span class="n">credentials</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">query_parameters</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;code&#39;</span><span class="p">)</span>
+
+<span class="n">shopify</span><span class="o">.</span><span class="n">setup_access_token</span><span class="p">()</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Returns True if the signature is valid.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <a href="http://github.com/masom/shopify-trois"><img style="position: fixed; top: 0; right: 0; border: 0;"
+    src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+  
+
+  
+
+  </body>
+</html>

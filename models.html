@@ -1,0 +1,828 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Models &mdash; Shopify-Trois 0.3 documentation</title>
+    
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Shopify-Trois 0.3 documentation" href="index.html" />
+    <link rel="next" title="Engines" href="engines.html" />
+    <link rel="prev" title="Shopify-Trois" href="index.html" /> 
+  </head>
+  <body>
+  
+  
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="models">
+<h1>Models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="base">
+<h2>Base<a class="headerlink" href="#base" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="shopify_trois.models.model.Model">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.model.</tt><tt class="descname">Model</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.model.Model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">builtins.object</span></tt></p>
+<p>Base model class for all Shopify resources.</p>
+<dl class="method">
+<dt id="shopify_trois.models.model.Model.changes">
+<tt class="descname">changes</tt><big>(</big><big>)</big><a class="headerlink" href="#shopify_trois.models.model.Model.changes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary of attributes that have changed.</p>
+<p><a class="reference external" href="http://stackoverflow.com/a/111364/1014879">http://stackoverflow.com/a/111364/1014879</a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.model.Model.enclosure">
+<tt class="descname">enclosure</tt><em class="property"> = None</em><a class="headerlink" href="#shopify_trois.models.model.Model.enclosure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Holds the data enclosure name if not normalized.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.models.model.Model.exists">
+<tt class="descname">exists</tt><big>(</big><big>)</big><a class="headerlink" href="#shopify_trois.models.model.Model.exists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if the instance has been persisted.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.model.Model.is_subresource_of">
+<tt class="descname">is_subresource_of</tt><em class="property"> = None</em><a class="headerlink" href="#shopify_trois.models.model.Model.is_subresource_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mark the model as being a subresource of another.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.model.Model.parent_id">
+<tt class="descname">parent_id</tt><em class="property"> = None</em><a class="headerlink" href="#shopify_trois.models.model.Model.parent_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Holds the model parent id value. Used with <tt class="xref py py-attr docutils literal"><span class="pre">is_subresource_of</span></tt>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.model.Model.primary_key">
+<tt class="descname">primary_key</tt><em class="property"> = 'id'</em><a class="headerlink" href="#shopify_trois.models.model.Model.primary_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>The model primary key.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.model.Model.properties">
+<tt class="descname">properties</tt><em class="property"> = []</em><a class="headerlink" href="#shopify_trois.models.model.Model.properties" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of properties expoded by the api.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.model.Model.resource">
+<tt class="descname">resource</tt><em class="property"> = ''</em><a class="headerlink" href="#shopify_trois.models.model.Model.resource" title="Permalink to this definition">¶</a></dt>
+<dd><p>The shopify url resource.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.model.Model.supported">
+<tt class="descname">supported</tt><em class="property"> = []</em><a class="headerlink" href="#shopify_trois.models.model.Model.supported" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of supported actions on the resource.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.models.model.Model.to_dict">
+<tt class="descname">to_dict</tt><big>(</big><big>)</big><a class="headerlink" href="#shopify_trois.models.model.Model.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the instance as a dictionary.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="shopify_trois.models.model.Model.to_underscore_name">
+<em class="property">classmethod </em><tt class="descname">to_underscore_name</tt><big>(</big><big>)</big><a class="headerlink" href="#shopify_trois.models.model.Model.to_underscore_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.models.model.Model.update">
+<tt class="descname">update</tt><big>(</big><em>data</em>, <em>ignore_properties=False</em><big>)</big><a class="headerlink" href="#shopify_trois.models.model.Model.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the instance with the provided data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> &#8211; Properties to update.</li>
+<li><strong>ignore_properties</strong> &#8211; Only update known properties when set
+to false</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="id1">
+<h2>Models<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-shopify_trois.models"></span><dl class="class">
+<dt id="shopify_trois.models.ApplicationCharge">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">ApplicationCharge</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.ApplicationCharge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>ApplicationCharge
+<a class="reference external" href="http://docs.shopify.com/api/applicationcharge">http://docs.shopify.com/api/applicationcharge</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.ApplicationCharge.properties">
+<tt class="descname">properties</tt><em class="property"> = ['created_at', 'id', 'name', 'price', 'return_url', 'status', 'test', 'updated_at', 'confirmation_url']</em><a class="headerlink" href="#shopify_trois.models.ApplicationCharge.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.ApplicationCharge.resource">
+<tt class="descname">resource</tt><em class="property"> = 'application_charges'</em><a class="headerlink" href="#shopify_trois.models.ApplicationCharge.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.ApplicationCharge.supported">
+<tt class="descname">supported</tt><em class="property"> = ['index', 'view', 'create', '/activate']</em><a class="headerlink" href="#shopify_trois.models.ApplicationCharge.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.Article">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">Article</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.Article" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>Article
+<a class="reference external" href="http://docs.shopify.com/api/article">http://docs.shopify.com/api/article</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.Article.is_subresource_of">
+<tt class="descname">is_subresource_of</tt><a class="headerlink" href="#shopify_trois.models.Article.is_subresource_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#shopify_trois.models.Blog" title="shopify_trois.models.Blog"><tt class="xref py py-class docutils literal"><span class="pre">Blog</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Article.properties">
+<tt class="descname">properties</tt><em class="property"> = ['author', 'blog_id', 'body_html', 'created_at', 'id', 'published_at', 'summary_html', 'template_suffix', 'title', 'updated_at', 'user_id', 'tags']</em><a class="headerlink" href="#shopify_trois.models.Article.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Article.resource">
+<tt class="descname">resource</tt><em class="property"> = 'articles'</em><a class="headerlink" href="#shopify_trois.models.Article.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Article.supported">
+<tt class="descname">supported</tt><em class="property"> = ['index', 'count', 'view', 'create', 'update', 'delete']</em><a class="headerlink" href="#shopify_trois.models.Article.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.Blog">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">Blog</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.Blog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>Blog
+<a class="reference external" href="http://docs.shopify.com/api/blog">http://docs.shopify.com/api/blog</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.Blog.properties">
+<tt class="descname">properties</tt><em class="property"> = ['commentable', 'created_at', 'feedburner', 'feedburner_location', 'handle', 'id', 'template_suffix', 'title', 'updated_at', 'tags']</em><a class="headerlink" href="#shopify_trois.models.Blog.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Blog.resource">
+<tt class="descname">resource</tt><em class="property"> = 'blogs'</em><a class="headerlink" href="#shopify_trois.models.Blog.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Blog.supported">
+<tt class="descname">supported</tt><em class="property"> = ['index', 'count', 'view', 'create', 'update', 'delete']</em><a class="headerlink" href="#shopify_trois.models.Blog.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.CarrierService">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">CarrierService</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.CarrierService" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>CarrierService
+<a class="reference external" href="http://docs.shopify.com/api/carrierservice">http://docs.shopify.com/api/carrierservice</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.CarrierService.properties">
+<tt class="descname">properties</tt><em class="property"> = ['name', 'callback_url', 'format', 'service_discovery', 'active', 'carrier_service_type']</em><a class="headerlink" href="#shopify_trois.models.CarrierService.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.CarrierService.resource">
+<tt class="descname">resource</tt><em class="property"> = 'carrier_services'</em><a class="headerlink" href="#shopify_trois.models.CarrierService.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.CarrierService.supported">
+<tt class="descname">supported</tt><em class="property"> = ['index', 'create', 'view', 'delete', 'update']</em><a class="headerlink" href="#shopify_trois.models.CarrierService.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.Checkout">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">Checkout</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.Checkout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>Checkout
+<a class="reference external" href="http://docs.shopify.com/api/checkout">http://docs.shopify.com/api/checkout</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.Checkout.properties">
+<tt class="descname">properties</tt><em class="property"> = ['buyer_accepts_marketing', 'cart_token', 'closed_at', 'completed_at', 'created_at', 'currency', 'email', 'gateway', 'id', 'landing_site', 'note', 'referring_site', 'shipping_lines', 'subtotal_price', 'tax_lines', 'taxes_included', 'token', 'total_discounts', 'total_line_items_price', 'total_price', 'total_tax', 'total_weight', 'updated_at', 'line_items', 'name', 'note_attributes', 'discount_codes', 'billing_address', 'shipping_address', 'customer']</em><a class="headerlink" href="#shopify_trois.models.Checkout.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Checkout.resource">
+<tt class="descname">resource</tt><em class="property"> = 'checkouts'</em><a class="headerlink" href="#shopify_trois.models.Checkout.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Checkout.supported">
+<tt class="descname">supported</tt><em class="property"> = ['count', 'index']</em><a class="headerlink" href="#shopify_trois.models.Checkout.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.Collect">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">Collect</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.Collect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>Collect
+<a class="reference external" href="http://docs.shopify.com/api/collect">http://docs.shopify.com/api/collect</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.Collect.properties">
+<tt class="descname">properties</tt><em class="property"> = ['collection_id', 'created_at', 'featured', 'id', 'product_id', 'sort_value', 'updated_at', 'position']</em><a class="headerlink" href="#shopify_trois.models.Collect.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Collect.resource">
+<tt class="descname">resource</tt><em class="property"> = 'collects'</em><a class="headerlink" href="#shopify_trois.models.Collect.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Collect.supported">
+<tt class="descname">supported</tt><em class="property"> = ['count', 'create', 'index', 'view']</em><a class="headerlink" href="#shopify_trois.models.Collect.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.Comment">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">Comment</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.Comment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>Comment
+<a class="reference external" href="http://docs.shopify.com/api/comment">http://docs.shopify.com/api/comment</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.Comment.properties">
+<tt class="descname">properties</tt><em class="property"> = ['article_id', 'author', 'blog_id', 'body', 'body_html', 'created_at', 'email', 'id', 'ip', 'published_at', 'status', 'updated_at', 'user_agent']</em><a class="headerlink" href="#shopify_trois.models.Comment.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Comment.resource">
+<tt class="descname">resource</tt><em class="property"> = 'comments'</em><a class="headerlink" href="#shopify_trois.models.Comment.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Comment.supported">
+<tt class="descname">supported</tt><em class="property"> = ['count', 'create', 'index', 'update', 'view', '/spam', '/not_spam', '/approve', '/remove']</em><a class="headerlink" href="#shopify_trois.models.Comment.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.CustomCollection">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">CustomCollection</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.CustomCollection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>CustomCollection
+<a class="reference external" href="http://docs.shopify.com/api/customcollection">http://docs.shopify.com/api/customcollection</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.CustomCollection.properties">
+<tt class="descname">properties</tt><em class="property"> = ['body_html', 'handle', 'id', 'products_count', 'published_at', 'published_scope', 'sort_order', 'template_suffix', 'title', 'updated_at', 'image']</em><a class="headerlink" href="#shopify_trois.models.CustomCollection.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.CustomCollection.resource">
+<tt class="descname">resource</tt><em class="property"> = 'custom_collections'</em><a class="headerlink" href="#shopify_trois.models.CustomCollection.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.CustomCollection.supported">
+<tt class="descname">supported</tt><em class="property"> = ['count', 'create', 'delete', 'index', 'update', 'view']</em><a class="headerlink" href="#shopify_trois.models.CustomCollection.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.Customer">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">Customer</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.Customer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>Customer
+<a class="reference external" href="http://docs.shopify.com/api/customer">http://docs.shopify.com/api/customer</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.Customer.properties">
+<tt class="descname">properties</tt><em class="property"> = ['accepts_marketing', 'created_at', 'email', 'first_name', 'id', 'last_name', 'last_order_id', 'muiltipass_identifier', 'note', 'order_count', 'state', 'total_spent', 'updated_at', 'verified_email', 'tags', 'last_order_name', 'default_address', 'addresses']</em><a class="headerlink" href="#shopify_trois.models.Customer.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Customer.resource">
+<tt class="descname">resource</tt><em class="property"> = 'customers'</em><a class="headerlink" href="#shopify_trois.models.Customer.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Customer.supported">
+<tt class="descname">supported</tt><em class="property"> = ['count', 'create', 'delete', 'index', 'search', 'update', 'view']</em><a class="headerlink" href="#shopify_trois.models.Customer.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.CustomerGroup">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">CustomerGroup</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.CustomerGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>CustomerGroup
+<a class="reference external" href="http://docs.shopify.com/api/customergroup">http://docs.shopify.com/api/customergroup</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.CustomerGroup.properties">
+<tt class="descname">properties</tt><em class="property"> = ['created_at', 'id', 'name', 'updated_at', 'query']</em><a class="headerlink" href="#shopify_trois.models.CustomerGroup.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.CustomerGroup.resource">
+<tt class="descname">resource</tt><em class="property"> = 'customer_groups'</em><a class="headerlink" href="#shopify_trois.models.CustomerGroup.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.CustomerGroup.supported">
+<tt class="descname">supported</tt><em class="property"> = ['create', 'delete', 'index', '/customers', 'update', 'view']</em><a class="headerlink" href="#shopify_trois.models.CustomerGroup.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.Event">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">Event</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.Event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>Event
+<a class="reference external" href="http://docs.shopify.com/api/event">http://docs.shopify.com/api/event</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.Event.properties">
+<tt class="descname">properties</tt><em class="property"> = ['arguments', 'body', 'created_at', 'id', 'subject_id', 'subject_type', 'verb', 'message']</em><a class="headerlink" href="#shopify_trois.models.Event.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Event.resource">
+<tt class="descname">resource</tt><em class="property"> = 'events'</em><a class="headerlink" href="#shopify_trois.models.Event.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Event.supported">
+<tt class="descname">supported</tt><em class="property"> = ['count', 'index', 'view']</em><a class="headerlink" href="#shopify_trois.models.Event.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.Fulfillment">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">Fulfillment</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.Fulfillment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>Fulfillment
+<a class="reference external" href="http://docs.shopify.com/api/fulfillment">http://docs.shopify.com/api/fulfillment</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.Fulfillment.is_subresource_of">
+<tt class="descname">is_subresource_of</tt><a class="headerlink" href="#shopify_trois.models.Fulfillment.is_subresource_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#shopify_trois.models.Order" title="shopify_trois.models.Order"><tt class="xref py py-class docutils literal"><span class="pre">Order</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Fulfillment.properties">
+<tt class="descname">properties</tt><em class="property"> = ['fulfillment_service', 'fulfillment_status', 'grams', 'id', 'price', 'product_id', 'quantity', 'requires_shipping', 'sku', 'title', 'variant_id', 'variant_title', 'vendor', 'name', 'variant_inventory_management', 'properties', 'product_exists']</em><a class="headerlink" href="#shopify_trois.models.Fulfillment.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Fulfillment.resource">
+<tt class="descname">resource</tt><em class="property"> = 'fulfillments'</em><a class="headerlink" href="#shopify_trois.models.Fulfillment.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Fulfillment.supported">
+<tt class="descname">supported</tt><em class="property"> = ['count', 'create', 'index', '/cancel', 'update', 'view']</em><a class="headerlink" href="#shopify_trois.models.Fulfillment.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.FulfillmentService">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">FulfillmentService</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.FulfillmentService" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>FulfillmentService
+<a class="reference external" href="http://docs.shopify.com/api/fulfillmentservice">http://docs.shopify.com/api/fulfillmentservice</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.FulfillmentService.properties">
+<tt class="descname">properties</tt><em class="property"> = ['callback_url', 'format', 'name', 'requires_shipping_method', 'tracking_support', 'credential1', 'email', 'handle', 'id', 'include_pending_stock', 'name', 'service_name', 'inventory_management', 'provider_id', 'credential2_exists']</em><a class="headerlink" href="#shopify_trois.models.FulfillmentService.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.FulfillmentService.resource">
+<tt class="descname">resource</tt><em class="property"> = 'fulfillment_services'</em><a class="headerlink" href="#shopify_trois.models.FulfillmentService.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.FulfillmentService.supported">
+<tt class="descname">supported</tt><em class="property"> = ['index', 'count', 'view', 'create', 'update', 'delete']</em><a class="headerlink" href="#shopify_trois.models.FulfillmentService.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.Metafield">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">Metafield</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.Metafield" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>MetaField
+<a class="reference external" href="http://docs.shopify.com/api/metafield">http://docs.shopify.com/api/metafield</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.Metafield.properties">
+<tt class="descname">properties</tt><em class="property"> = ['created_at', 'description', 'id', 'key', 'namespace', 'owner_id', 'updated_at', 'value', 'value_type', 'owner_resource']</em><a class="headerlink" href="#shopify_trois.models.Metafield.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Metafield.resource">
+<tt class="descname">resource</tt><em class="property"> = 'metafields'</em><a class="headerlink" href="#shopify_trois.models.Metafield.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Metafield.supported">
+<tt class="descname">supported</tt><em class="property"> = ['count', 'create', 'delete', 'index', 'update', 'view']</em><a class="headerlink" href="#shopify_trois.models.Metafield.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.Order">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">Order</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.Order" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>Order
+<a class="reference external" href="http://docs.shopify.com/api/order">http://docs.shopify.com/api/order</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.Order.properties">
+<tt class="descname">properties</tt><em class="property"> = ['buyer_accepts_marketing', 'cancel_reason', 'cancelled_at', 'cart_token', 'checkout_token', 'closed_at', 'confirmed', 'created_at', 'currency', 'email', 'financial_status', 'fulfillment_status', 'gateway', 'id', 'landing_site', 'location_id', 'name', 'note', 'number', 'reference', 'referring_site', 'source', 'subtotal_price', 'taxes_included', 'test', 'token', 'total_discounts', 'total_line_items_price', 'total_price', 'total_price_usd', 'total_tax', 'total_weight', 'updated_at', 'user_id', 'browser_ip', 'landing_site_ref', 'order_number', 'discount_codes', 'note_attributes', 'processing_method', 'checkout_id', 'line_items', 'shipping_lines', 'tax_lines', 'payment_details', 'billing_address', 'shipping_address', 'fulfillments', 'client_details', 'customer']</em><a class="headerlink" href="#shopify_trois.models.Order.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Order.resource">
+<tt class="descname">resource</tt><em class="property"> = 'orders'</em><a class="headerlink" href="#shopify_trois.models.Order.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Order.supported">
+<tt class="descname">supported</tt><em class="property"> = ['count', 'create', 'delete', 'index', '/close', '/open', '/cancel', 'update', 'view']</em><a class="headerlink" href="#shopify_trois.models.Order.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.OrderRisk">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">OrderRisk</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.OrderRisk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>Page
+<a class="reference external" href="http://docs.shopify.com/api/orderrisk">http://docs.shopify.com/api/orderrisk</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.OrderRisk.enclosure">
+<tt class="descname">enclosure</tt><em class="property"> = 'risk'</em><a class="headerlink" href="#shopify_trois.models.OrderRisk.enclosure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.OrderRisk.is_subresource_of">
+<tt class="descname">is_subresource_of</tt><a class="headerlink" href="#shopify_trois.models.OrderRisk.is_subresource_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#shopify_trois.models.Order" title="shopify_trois.models.Order"><tt class="xref py py-class docutils literal"><span class="pre">Order</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.OrderRisk.properties">
+<tt class="descname">properties</tt><em class="property"> = ['cause_cancel', 'checkout_id', 'display', 'id', 'message', 'order_id', 'recommendation', 'score', 'source']</em><a class="headerlink" href="#shopify_trois.models.OrderRisk.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.OrderRisk.resource">
+<tt class="descname">resource</tt><em class="property"> = 'risks'</em><a class="headerlink" href="#shopify_trois.models.OrderRisk.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.OrderRisk.supported">
+<tt class="descname">supported</tt><em class="property"> = ['create', 'update', 'delete']</em><a class="headerlink" href="#shopify_trois.models.OrderRisk.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.Page">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">Page</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.Page" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>Page
+<a class="reference external" href="http://docs.shopify.com/api/page">http://docs.shopify.com/api/page</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.Page.properties">
+<tt class="descname">properties</tt><em class="property"> = ['author', 'body_html', 'created_at', 'handle', 'id', 'published_at', 'shop_id', 'template_suffix', 'title', 'updated_at']</em><a class="headerlink" href="#shopify_trois.models.Page.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Page.resource">
+<tt class="descname">resource</tt><em class="property"> = 'pages'</em><a class="headerlink" href="#shopify_trois.models.Page.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Page.supported">
+<tt class="descname">supported</tt><em class="property"> = ['index', 'view', 'create', 'count', 'update', 'delete']</em><a class="headerlink" href="#shopify_trois.models.Page.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.Product">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">Product</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.Product" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>Product
+<a class="reference external" href="http://docs.shopify.com/api/product">http://docs.shopify.com/api/product</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.Product.properties">
+<tt class="descname">properties</tt><em class="property"> = ['body_html', 'created_at', 'handle', 'id', 'product_type', 'published_at', 'published_scope', 'template_suffix', 'title', 'updated_at', 'vendor', 'tags', 'variants', 'options', 'images', 'image']</em><a class="headerlink" href="#shopify_trois.models.Product.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Product.resource">
+<tt class="descname">resource</tt><em class="property"> = 'products'</em><a class="headerlink" href="#shopify_trois.models.Product.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Product.supported">
+<tt class="descname">supported</tt><em class="property"> = ['index', 'view', 'create', 'count', 'update', 'delete']</em><a class="headerlink" href="#shopify_trois.models.Product.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.ProductImage">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">ProductImage</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.ProductImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>ProductImage
+<a class="reference external" href="http://docs.shopify.com/api/productimage">http://docs.shopify.com/api/productimage</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.ProductImage.enclosure">
+<tt class="descname">enclosure</tt><em class="property"> = 'image'</em><a class="headerlink" href="#shopify_trois.models.ProductImage.enclosure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.ProductImage.is_subresource_of">
+<tt class="descname">is_subresource_of</tt><a class="headerlink" href="#shopify_trois.models.ProductImage.is_subresource_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#shopify_trois.models.Product" title="shopify_trois.models.Product"><tt class="xref py py-class docutils literal"><span class="pre">Product</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.ProductImage.properties">
+<tt class="descname">properties</tt><em class="property"> = ['created_at', 'id', 'position', 'product_id', 'updated_at', 'src']</em><a class="headerlink" href="#shopify_trois.models.ProductImage.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.ProductImage.resource">
+<tt class="descname">resource</tt><em class="property"> = 'images'</em><a class="headerlink" href="#shopify_trois.models.ProductImage.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.ProductImage.supported">
+<tt class="descname">supported</tt><em class="property"> = ['index', 'view', 'create', 'delete']</em><a class="headerlink" href="#shopify_trois.models.ProductImage.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.ProductVariant">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">ProductVariant</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.ProductVariant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>ProductVariant
+<a class="reference external" href="http://docs.shopify.com/api/productvariant">http://docs.shopify.com/api/productvariant</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.ProductVariant.enclosure">
+<tt class="descname">enclosure</tt><em class="property"> = 'variant'</em><a class="headerlink" href="#shopify_trois.models.ProductVariant.enclosure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.ProductVariant.is_subresource_of">
+<tt class="descname">is_subresource_of</tt><a class="headerlink" href="#shopify_trois.models.ProductVariant.is_subresource_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#shopify_trois.models.Product" title="shopify_trois.models.Product"><tt class="xref py py-class docutils literal"><span class="pre">Product</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.ProductVariant.properties">
+<tt class="descname">properties</tt><em class="property"> = ['barcode', 'compare_at_price', 'created_at', 'fulfillment_service', 'grams', 'id', 'inventory_management', 'inventory_policy', 'option1', 'option2', 'option3', 'position', 'price', 'product_id', 'requires_shipping', 'sku', 'taxable', 'title', 'updated_at', 'inventory_quantity']</em><a class="headerlink" href="#shopify_trois.models.ProductVariant.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.ProductVariant.resource">
+<tt class="descname">resource</tt><em class="property"> = 'variants'</em><a class="headerlink" href="#shopify_trois.models.ProductVariant.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.ProductVariant.supported">
+<tt class="descname">supported</tt><em class="property"> = ['index', 'view', 'count', 'create', 'update', 'delete']</em><a class="headerlink" href="#shopify_trois.models.ProductVariant.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.RecurringApplicationCharge">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">RecurringApplicationCharge</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.RecurringApplicationCharge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>RecurringApplicationCharge
+<a class="reference external" href="http://docs.shopify.com/api/recurringapplicationcharge">http://docs.shopify.com/api/recurringapplicationcharge</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.RecurringApplicationCharge.properties">
+<tt class="descname">properties</tt><em class="property"> = ['activated_on', 'billing_on', 'cancelled_on', 'created_at', 'id', 'name', 'price', 'return_url', 'status', 'test', 'trial_days', 'trial_ends_on', 'updated_at', 'confirmation_url']</em><a class="headerlink" href="#shopify_trois.models.RecurringApplicationCharge.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.RecurringApplicationCharge.resource">
+<tt class="descname">resource</tt><em class="property"> = 'recurring_application_charges'</em><a class="headerlink" href="#shopify_trois.models.RecurringApplicationCharge.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.RecurringApplicationCharge.supported">
+<tt class="descname">supported</tt><em class="property"> = ['index', 'view', 'create', '/activate']</em><a class="headerlink" href="#shopify_trois.models.RecurringApplicationCharge.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.Redirect">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">Redirect</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.Redirect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>Redirect
+<a class="reference external" href="http://docs.shopify.com/api/redirect">http://docs.shopify.com/api/redirect</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.Redirect.properties">
+<tt class="descname">properties</tt><em class="property"> = ['created_at', 'id', 'path', 'target', 'updated_at']</em><a class="headerlink" href="#shopify_trois.models.Redirect.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Redirect.resource">
+<tt class="descname">resource</tt><em class="property"> = 'redirects'</em><a class="headerlink" href="#shopify_trois.models.Redirect.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Redirect.supported">
+<tt class="descname">supported</tt><em class="property"> = ['index', 'view', 'count', 'create', 'update', 'delete']</em><a class="headerlink" href="#shopify_trois.models.Redirect.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.ScriptTag">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">ScriptTag</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.ScriptTag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>ScriptTag
+<a class="reference external" href="http://docs.shopify.com/api/scriptag">http://docs.shopify.com/api/scriptag</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.ScriptTag.properties">
+<tt class="descname">properties</tt><em class="property"> = ['created_at', 'id', 'event', 'src', 'updated_at']</em><a class="headerlink" href="#shopify_trois.models.ScriptTag.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.ScriptTag.resource">
+<tt class="descname">resource</tt><em class="property"> = 'script_tags'</em><a class="headerlink" href="#shopify_trois.models.ScriptTag.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.ScriptTag.supported">
+<tt class="descname">supported</tt><em class="property"> = ['index', 'view', 'count', 'create', 'update', 'delete']</em><a class="headerlink" href="#shopify_trois.models.ScriptTag.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.Shop">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">Shop</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.Shop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>Shop
+<a class="reference external" href="http://docs.shopify.com/api/shop">http://docs.shopify.com/api/shop</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.Shop.properties">
+<tt class="descname">properties</tt><em class="property"> = ['address1', 'city', 'country', 'created_at', 'customer_email', 'currency', 'domain', 'email', 'google_apps_domain', 'google_apps_login_enabled', 'id', 'latitude', 'longitude', 'money_format', 'money_with_currency_format', 'myshopify_domain', 'name', 'plan_name', 'phone', 'province', 'public', 'shop_owner', 'source', 'tax_shipping', 'taxes_included', 'timezone', 'zip']</em><a class="headerlink" href="#shopify_trois.models.Shop.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Shop.resource">
+<tt class="descname">resource</tt><em class="property"> = 'shop'</em><a class="headerlink" href="#shopify_trois.models.Shop.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Shop.supported">
+<tt class="descname">supported</tt><em class="property"> = ['view']</em><a class="headerlink" href="#shopify_trois.models.Shop.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.Theme">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">Theme</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.Theme" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>Theme
+<a class="reference external" href="http://docs.shopify.com/api/theme">http://docs.shopify.com/api/theme</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.Theme.properties">
+<tt class="descname">properties</tt><em class="property"> = ['created_at', 'id', 'name', 'role', 'updated_at', 'src']</em><a class="headerlink" href="#shopify_trois.models.Theme.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Theme.resource">
+<tt class="descname">resource</tt><em class="property"> = 'themes'</em><a class="headerlink" href="#shopify_trois.models.Theme.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Theme.supported">
+<tt class="descname">supported</tt><em class="property"> = ['index', 'view', 'create', 'update', 'delete']</em><a class="headerlink" href="#shopify_trois.models.Theme.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.Transaction">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">Transaction</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.Transaction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>Transaction
+<a class="reference external" href="http://docs.shopify.com/api/transactions">http://docs.shopify.com/api/transactions</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.Transaction.is_subresource_of">
+<tt class="descname">is_subresource_of</tt><a class="headerlink" href="#shopify_trois.models.Transaction.is_subresource_of" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#shopify_trois.models.Order" title="shopify_trois.models.Order"><tt class="xref py py-class docutils literal"><span class="pre">Order</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Transaction.properties">
+<tt class="descname">properties</tt><em class="property"> = ['amount', 'authorization', 'created_at', 'gateway', 'id', 'kind', 'location_id', 'message', 'order_id', 'status', 'user_id', 'device_id', 'test', 'receipt']</em><a class="headerlink" href="#shopify_trois.models.Transaction.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Transaction.resource">
+<tt class="descname">resource</tt><em class="property"> = 'transactions'</em><a class="headerlink" href="#shopify_trois.models.Transaction.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Transaction.supported">
+<tt class="descname">supported</tt><em class="property"> = ['index', 'count', 'view', 'create']</em><a class="headerlink" href="#shopify_trois.models.Transaction.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="shopify_trois.models.Webhook">
+<em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">Webhook</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.Webhook" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
+<p>Webhook
+<a class="reference external" href="http://docs.shopify.com/api/webhook">http://docs.shopify.com/api/webhook</a></p>
+<dl class="attribute">
+<dt id="shopify_trois.models.Webhook.properties">
+<tt class="descname">properties</tt><em class="property"> = ['address', 'created_at', 'format', 'id', 'topic', 'updated_at']</em><a class="headerlink" href="#shopify_trois.models.Webhook.properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Webhook.resource">
+<tt class="descname">resource</tt><em class="property"> = 'webhooks'</em><a class="headerlink" href="#shopify_trois.models.Webhook.resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="shopify_trois.models.Webhook.supported">
+<tt class="descname">supported</tt><em class="property"> = ['index', 'count', 'view', 'create', 'update', 'delete']</em><a class="headerlink" href="#shopify_trois.models.Webhook.supported" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <a href="http://github.com/masom/shopify-trois"><img style="position: fixed; top: 0; right: 0; border: 0;"
+    src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+  
+
+  
+
+  </body>
+</html>
