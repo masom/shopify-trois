@@ -80,15 +80,17 @@ will be returned.</li>
 </tbody>
 </table>
 <p>example usage:</p>
-<blockquote>
-<div><p>from shopify_trois.engines.http import Json as Shopify
-from shopify_trois import Credentials
-from shopify_trois.models import Blog</p>
-<p>credentials = Credentials(...)
-shopify = Shopify(store_name=&#8221;test&#8221;, credentials=credentials)</p>
-<p>blog = Blog(title=&#8221;Awesome&#8221;)
-shopify.add(blog)</p>
-</div></blockquote>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">shopify_trois.engines.http</span> <span class="kn">import</span> <span class="n">Json</span> <span class="k">as</span> <span class="n">Shopify</span>
+<span class="kn">from</span> <span class="nn">shopify_trois</span> <span class="kn">import</span> <span class="n">Credentials</span>
+<span class="kn">from</span> <span class="nn">shopify_trois.models</span> <span class="kn">import</span> <span class="n">Blog</span>
+
+<span class="n">credentials</span> <span class="o">=</span> <span class="n">Credentials</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">shopify</span> <span class="o">=</span> <span class="n">Shopify</span><span class="p">(</span><span class="n">store_name</span><span class="o">=</span><span class="s">&quot;test&quot;</span><span class="p">,</span> <span class="n">credentials</span><span class="o">=</span><span class="n">credentials</span><span class="p">)</span>
+
+<span class="n">blog</span> <span class="o">=</span> <span class="n">Blog</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">&quot;Awesome&quot;</span><span class="p">)</span>
+<span class="n">shopify</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">blog</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -137,15 +139,17 @@ exists.</p>
 </tbody>
 </table>
 <p>example usage:</p>
-<blockquote>
-<div><p>from shopify_trois.engines.http import Json as Shopify
-from shopify_trois import Credentials
-from shopify_trois.models import Blog</p>
-<p>credentials = Credentials(...)
-shopify = Shopify(store_name=&#8221;test&#8221;, credentials=credentials)</p>
-<p>blog = Blog(id=3)
-shopify.delete(blog)</p>
-</div></blockquote>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">shopify_trois.engines.http</span> <span class="kn">import</span> <span class="n">Json</span> <span class="k">as</span> <span class="n">Shopify</span>
+<span class="kn">from</span> <span class="nn">shopify_trois</span> <span class="kn">import</span> <span class="n">Credentials</span>
+<span class="kn">from</span> <span class="nn">shopify_trois.models</span> <span class="kn">import</span> <span class="n">Blog</span>
+
+<span class="n">credentials</span> <span class="o">=</span> <span class="n">Credentials</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">shopify</span> <span class="o">=</span> <span class="n">Shopify</span><span class="p">(</span><span class="n">store_name</span><span class="o">=</span><span class="s">&quot;test&quot;</span><span class="p">,</span> <span class="n">credentials</span><span class="o">=</span><span class="n">credentials</span><span class="p">)</span>
+
+<span class="n">blog</span> <span class="o">=</span> <span class="n">Blog</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">shopify</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">blog</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="attribute">
@@ -173,14 +177,16 @@ returning a json object.</li>
 </tbody>
 </table>
 <p>example usage:</p>
-<blockquote>
-<div><p>from shopify_trois.engines.http import Json as Shopify
-from shopify_trois import Credentials
-from shopify_trois.models import Blog</p>
-<p>credentials = Credentials(...)
-shopify = Shopify(store_name=&#8221;test&#8221;, credentials=credentials)</p>
-<p>blog = shopify.fetch(Blog, 2)</p>
-</div></blockquote>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">shopify_trois.engines.http</span> <span class="kn">import</span> <span class="n">Json</span> <span class="k">as</span> <span class="n">Shopify</span>
+<span class="kn">from</span> <span class="nn">shopify_trois</span> <span class="kn">import</span> <span class="n">Credentials</span>
+<span class="kn">from</span> <span class="nn">shopify_trois.models</span> <span class="kn">import</span> <span class="n">Blog</span>
+
+<span class="n">credentials</span> <span class="o">=</span> <span class="n">Credentials</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">shopify</span> <span class="o">=</span> <span class="n">Shopify</span><span class="p">(</span><span class="n">store_name</span><span class="o">=</span><span class="s">&quot;test&quot;</span><span class="p">,</span> <span class="n">credentials</span><span class="o">=</span><span class="n">credentials</span><span class="p">)</span>
+
+<span class="n">blog</span> <span class="o">=</span> <span class="n">shopify</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">Blog</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -202,17 +208,18 @@ instead of returning a json object.</li>
 </tbody>
 </table>
 <p>example usage:</p>
-<blockquote>
-<div><p>from shopify_trois.engines.http import Json as Shopify
-from shopify_trois import Credentials
-from shopify_trois.models import Blog</p>
-<p>credentials = Credentials(...)
-shopify = Shopify(store_name=&#8221;test&#8221;, credentials=credentials)</p>
-<p>blogs = shopify.index(Blog)
-for blog in blogs:</p>
-<blockquote>
-<div>print(blog.to_dict())</div></blockquote>
-</div></blockquote>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">shopify_trois.engines.http</span> <span class="kn">import</span> <span class="n">Json</span> <span class="k">as</span> <span class="n">Shopify</span>
+<span class="kn">from</span> <span class="nn">shopify_trois</span> <span class="kn">import</span> <span class="n">Credentials</span>
+<span class="kn">from</span> <span class="nn">shopify_trois.models</span> <span class="kn">import</span> <span class="n">Blog</span>
+
+<span class="n">credentials</span> <span class="o">=</span> <span class="n">Credentials</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">shopify</span> <span class="o">=</span> <span class="n">Shopify</span><span class="p">(</span><span class="n">store_name</span><span class="o">=</span><span class="s">&quot;test&quot;</span><span class="p">,</span> <span class="n">credentials</span><span class="o">=</span><span class="n">credentials</span><span class="p">)</span>
+
+<span class="n">blogs</span> <span class="o">=</span> <span class="n">shopify</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">Blog</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">blog</span> <span class="ow">in</span> <span class="n">blogs</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">blog</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="attribute">
@@ -275,16 +282,18 @@ will be returned.</li>
 </tbody>
 </table>
 <p>example usage:</p>
-<blockquote>
-<div><p>from shopify_trois.engines.http import Json as Shopify
-from shopify_trois import Credentials
-from shopify_trois.models import Blog</p>
-<p>credentials = Credentials(...)
-shopify = Shopify(store_name=&#8221;test&#8221;, credentials=credentials)</p>
-<p>blog = shopify.fetch(Blog, 4)
-blog.commentable = False
-shopify.update(blog)</p>
-</div></blockquote>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">shopify_trois.engines.http</span> <span class="kn">import</span> <span class="n">Json</span> <span class="k">as</span> <span class="n">Shopify</span>
+<span class="kn">from</span> <span class="nn">shopify_trois</span> <span class="kn">import</span> <span class="n">Credentials</span>
+<span class="kn">from</span> <span class="nn">shopify_trois.models</span> <span class="kn">import</span> <span class="n">Blog</span>
+
+<span class="n">credentials</span> <span class="o">=</span> <span class="n">Credentials</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">shopify</span> <span class="o">=</span> <span class="n">Shopify</span><span class="p">(</span><span class="n">store_name</span><span class="o">=</span><span class="s">&quot;test&quot;</span><span class="p">,</span> <span class="n">credentials</span><span class="o">=</span><span class="n">credentials</span><span class="p">)</span>
+
+<span class="n">blog</span> <span class="o">=</span> <span class="n">shopify</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">Blog</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">blog</span><span class="o">.</span><span class="n">commentable</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">shopify</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">blog</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
