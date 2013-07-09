@@ -96,7 +96,7 @@ class Json(OAuthEngine):
                             Shopify. When set to false, the raw JSON object
                             will be returned.
 
-        example usage:
+        example usage::
 
             from shopify_trois.engines.http import Json as Shopify
             from shopify_trois import Credentials
@@ -148,7 +148,7 @@ class Json(OAuthEngine):
 
         :param instance: The model instance to remove.
 
-        example usage:
+        example usage::
 
             from shopify_trois.engines.http import Json as Shopify
             from shopify_trois import Credentials
@@ -187,7 +187,7 @@ class Json(OAuthEngine):
                             Shopify. When set to False, the raw JSON object
                             will be returned.
 
-        example usage:
+        example usage::
 
             from shopify_trois.engines.http import Json as Shopify
             from shopify_trois import Credentials
@@ -244,7 +244,7 @@ class Json(OAuthEngine):
                               returning a json object.
         :param params: Query parameters.
 
-        example usage:
+        example usage::
 
             from shopify_trois.engines.http import Json as Shopify
             from shopify_trois import Credentials
@@ -287,7 +287,7 @@ class Json(OAuthEngine):
                               instead of returning a json object.
         :param params: Query parameters (see shopify documentation)
 
-        example usage:
+        example usage::
 
             from shopify_trois.engines.http import Json as Shopify
             from shopify_trois import Credentials
