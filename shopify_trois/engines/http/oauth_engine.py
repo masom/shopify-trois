@@ -7,9 +7,10 @@
     :copyright: (c) 2013 by Martin Samson
     :license: MIT, see LICENSE for more details.
 """
-
+import hashlib
 import requests
 from requests.models import PreparedRequest
+from requests.structures import CaseInsensitiveDict
 
 
 class OAuthEngine():
@@ -63,6 +64,7 @@ class OAuthEngine():
 
         request = PreparedRequest()
         request.prepare_url(url=url, params=params)
+
         return request.url
 
     def oauth_access_token_url(self):
@@ -78,7 +80,61 @@ class OAuthEngine():
 
         parser = PreparedRequest()
         parser.prepare_url(url=url, params=params)
+
         return parser.url
+
+    def verify_signature(self, query_parameters):
+        """Verify the signature provided with the query parameters.
+
+        http://docs.shopify.com/api/tutorials/oauth
+
+        example usage::
+
+            from shopify_trois import Credentials
+            from shopify_trois.engines import Json as Shopify
+            from urllib.parse import parse_qsl
+
+            credentials = Credentials(
+                api_key='your_api_key',
+                scope=['read_orders'],
+                secret='your_app_secret'
+            )
+
+            shopify = Shopify(shop_name="your_store_name", credentials=\
+                    credentials)
+
+            query_parameters = parse_qsl("code=238420989938cb70a609f6ece2e2586\
+                    b&shop=yourstore.myshopify.com&timestamp=1373382939&\
+                    signature=6fb122e33c21851c465345b8cb97245e")
+
+            if not shopify.verify_signature(query_parameters):
+                raise Exception("invalid signature")
+
+            credentials.code = dict(query_parameters).get('code')
+
+            shopify.setup_access_token()
+
+        :returns: Returns True if the signature is valid.
+
+        """
+        params = CaseInsensitiveDict(query_parameters)
+        signature = params.pop("signature", None)
+
+        calculated = ["%s=%s" % (k, v) for k, v in params.items()]
+        calculated.sort()
+        calculated = "".join(calculated)
+
+        calculated = "{secret}{calculated}".format(
+            secret=self.credentials.secret,
+            calculated=calculated
+        )
+
+        md5 = hashlib.md5()
+        md5.update(calculated.encode('utf-8'))
+
+        produced = md5.hexdigest()
+
+        return produced == signature
 
     def url_for_request(self, req):
         """Generates the url for the provided request.

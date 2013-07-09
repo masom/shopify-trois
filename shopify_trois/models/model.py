@@ -56,9 +56,13 @@ class Model():
             self._meta__.exists = True
 
     def exists(self):
+        """Determine if the instance has been persisted."""
+
         return self._meta__.exists
 
     def to_dict(self):
+        """Returns the instance as a dictionary."""
+
         data = dict(self.__dict__)
         del(data['_meta__'])
         return data
@@ -69,6 +73,12 @@ class Model():
         return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
 
     def update(self, data, ignore_properties=False):
+        """Update the instance with the provided data.
+
+        :param data: Properties to update.
+        :param ignore_properties: Only update known properties when set
+                                  to false
+        """
 
         entity_name = self.to_underscore_name()
 
@@ -88,6 +98,11 @@ class Model():
                 setattr(self, k, v)
 
     def changes(self):
+        """Returns a dictionary of attributes that have changed.
+
+        http://stackoverflow.com/a/111364/1014879
+        """
+
         missing = object()
         result = {}
         for key, original in self._meta__.original_state.items():

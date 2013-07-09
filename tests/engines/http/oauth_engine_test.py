@@ -74,6 +74,26 @@ class OAuthEngineTestCase(ShopifyTroisTestCase):
         url = shopify.oauth_access_token_url()
         self.assertEqual(url, expected)
 
+    def test_verify_signature(self):
+        credentials = Credentials(secret="test")
+        shopify = OAuthEngine(shop_name='test', credentials=credentials)
+
+        params = [
+            ("code", "86cbee47aea11249e7042167b90e38c7"),
+            ("shop", "test"),
+            ("timestamp", "1373383855"),
+            ("signature", "6019d0e365811b206fdd7f89037e7400")
+        ]
+        self.assertTrue(shopify.verify_signature(params))
+
+        params = [
+            ("code", "86cbee47aea11249e7"),
+            ("shop", "test"),
+            ("timestamp", "1373383855"),
+            ("signature", "6019d0e365811b206fdd7f89037e7400")
+        ]
+        self.assertFalse(shopify.verify_signature(params))
+
     def test_url_for_request(self):
         credentials = Credentials()
         shopify = OAuthEngine(shop_name='test', credentials=credentials)
