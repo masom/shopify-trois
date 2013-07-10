@@ -10,8 +10,8 @@ from setuptools import setup
 
 setup(
     name='shopify-trois',
-    version='0.4',
-    url='http://www.github.com/masom/shopify-trois',
+    version='0.5-dev',
+    url='http://masom.github.io/shopify-trois',
     license='MIT',
     author='Martin Samson',
     author_email='pyrolian@gmail.com',
@@ -27,7 +27,7 @@ setup(
     include_package_data=True,
     platforms='any',
     install_requires=[
-        'requests'
+        'requests>=1.2.3'
     ],
     test_suite='nose.collector',
     tests_require=[
@@ -40,6 +40,8 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
+        'Programming Language :: Python :: 3.2',
+        'Programming Language :: Python :: 3.3',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         'Topic :: Software Development :: Libraries :: Python Modules'
     ]

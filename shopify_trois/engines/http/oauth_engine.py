@@ -14,7 +14,16 @@ from requests.structures import CaseInsensitiveDict
 
 
 class OAuthEngine():
-    """"""
+    """The OAuth engine is a base adapter implementation for the
+    Shopify API using the OAuth authentication mechanism.
+
+    Requests made with this engine will automatically contain the
+    X-Shopify-Access-Token header.
+
+    :param shop_name: The shopify store name
+    :param credentials: A :class:`~shopify_trois.credential.Credential`
+                        instance.
+    """
 
     """The api base url."""
     _api_base = "https://{shop_name}.myshopify.com/admin"
@@ -30,11 +39,6 @@ class OAuthEngine():
     mime = ''
 
     def __init__(self, shop_name, credentials):
-        """
-        :param shop_name: The shopify store name
-        :param credentials: A :class:`~shopify_trois.credential.Credential`
-                            instance.
-        """
 
         self.credentials = credentials
 

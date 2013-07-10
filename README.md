@@ -73,7 +73,7 @@ The __awesome__ shopify api client for Python 3.3
     # Get all the webhooks and iterates them
     webhooks = shopify.index(Webhook)
     for webhook in webhooks:
-        # webhook is a Webhook instance, created by iterating the Collection
+        # webhook is a Webhook instance, created by iterating the collection.
         print(webhook.to_dict())
 
 #Requirements
