@@ -63,7 +63,7 @@ class OAuthEngine():
         params = [
             ('client_id', self.credentials.api_key),
             ('scope', ",".join(self.credentials.scope)),
-            ('redirect_to', redirect_to)
+            ('redirect_uri', redirect_to)
         ]
 
         request = PreparedRequest()

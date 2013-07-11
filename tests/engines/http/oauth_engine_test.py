@@ -29,7 +29,7 @@ class OAuthEngineTestCase(ShopifyTroisTestCase):
 
         expected = "https://test.myshopify.com/admin/oauth/authorize?" \
                    "client_id=&scope=yup&" \
-                   "redirect_to=http%3A%2F%2Flocalhost%2Finstalled"
+                   "redirect_uri=http%3A%2F%2Flocalhost%2Finstalled"
 
         self.assertEquals(url, expected)
 
