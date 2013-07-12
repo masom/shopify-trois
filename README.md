@@ -9,13 +9,11 @@ The __awesome__ shopify api client for Python 3.3
     pip install shopify-trois
 
 
-#Usage
-
-## Example Flask Application
+### Example Flask Application
 
    [Flask-Trois](https://github.com/masom/flask-trois "Flask-Trois")
    
-## Authorization
+### Authorization
 
     from shopify_trois import Credentials, Collection
     from shopify_trois.models import *
@@ -39,7 +37,7 @@ The __awesome__ shopify api client for Python 3.3
 
     # credentials.oauth_access_token will contain the access token. It would be a good idea to save it somewhere.
 
-## Client Setup Once Authorized
+### Client Setup Once Authorized
 
     credentials = Credentials(
         api_key='your api key',
@@ -53,7 +51,7 @@ The __awesome__ shopify api client for Python 3.3
     # The client is now ready to communicate with Shopify
     shopify.fetch(Shop).to_dict()
 
-## Fetching data
+### Fetching
 
     # Fetch the store information
     shop = shopify.fetch(Shop)
@@ -64,7 +62,7 @@ The __awesome__ shopify api client for Python 3.3
     # Calling changes() on a model instance will show the modified properties.
     print(shop.changes())
 
-## Creating data
+### Creating
 
     webhook = Webhook()
     webhook.address = "http://www.google.ca"
@@ -80,6 +78,6 @@ The __awesome__ shopify api client for Python 3.3
         # webhook is a Webhook instance, created by iterating the collection.
         print(webhook.to_dict())
 
-#Requirements
+# Requirements
 - requests ( https://pypi.python.org/pypi/requests )
 
