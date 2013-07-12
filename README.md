@@ -11,6 +11,10 @@ The __awesome__ shopify api client for Python 3.3
 
 #Usage
 
+## Example Flask Application
+
+   [Flask-Trois](https://github.com/masom/flask-trois "Flask-Trois")
+   
 ## Authorization
 
     from shopify_trois import Credentials, Collection
