@@ -82,7 +82,7 @@ class Model():
 
         if not entity_name in data:
             msg = "The data set does not contain `%s`"
-            raise KeyError(msg % self.resource)
+            raise KeyError(msg % entity_name)
 
         raw = data[entity_name]
 
