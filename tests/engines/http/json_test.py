@@ -19,6 +19,10 @@ class TestModel(Model):
     properties = ['id', 'name']
 
 
+class TestSubResource(TestModel):
+    is_subresource_of = TestModel
+
+
 class JsonEngineTestCase(ShopifyTroisTestCase):
 
     def test_class(self):
@@ -161,6 +165,23 @@ class JsonEngineTestCase(ShopifyTroisTestCase):
             self.fail()
         except ShopifyException:
             pass
+
+    def test_fetch_subresource(self):
+        encoding = 'UTF-8'
+        credentials = Credentials()
+        shopify = Shopify(shop_name='test', credentials=credentials)
+
+        data = '{"test_sub_resource": {"id": 1, "name": "test"}}'
+        response = requests.Response()
+        response.encoding = encoding
+        response._content = data.encode(encoding)
+        response.status_code = 200
+
+        shopify.session.get = mock.Mock(return_value=response)
+        instance = shopify.fetch(TestSubResource, 2, parent_id=1)
+        self.assertIsInstance(instance, TestModel)
+        self.assertEquals(instance.name, "test")
+        self.assertEquals(instance.id, 1)
 
     def test_fetch(self):
         encoding = 'UTF-8'

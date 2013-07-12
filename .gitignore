@@ -1,4 +1,5 @@
 __pycache__
+*.py[co]
 docs/_build
 test_store.py
 cover

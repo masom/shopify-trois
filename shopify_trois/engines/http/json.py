@@ -59,9 +59,8 @@ class Json(OAuthEngine):
 
         self._can_request("count", model)
 
-        req = Request(model)
+        req = Request(model, **params)
         req.resource += "/count"
-        req.params = params
 
         res = self._get(req)
         if res.status_code == requests.codes.ok:
@@ -259,8 +258,7 @@ class Json(OAuthEngine):
 
         self._can_request("view", model)
 
-        req = Request(model)
-        req.params = params
+        req = Request(model, **params)
 
         # Shop is the sole resource not following the same naming
         # convention for its resource url.
