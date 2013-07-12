@@ -71,6 +71,7 @@ class Json(OAuthEngine):
 
     def custom_post(self, instance, action, data=None):
         """Executes a custom post method on an instance.
+
         :param instance: The model instance being modified.
         :param action: The action to be executed.
         """
