@@ -3,6 +3,13 @@ Shopify-Trois Changelog
 
 Here you can see the full list of changes between each Shopify-Trois release.
 
+Version 0.6
+-----------
+
+Released on July 17th 2013, codename Instant
+
+- Added OAuthEngine.api_call_limit. It is auto-updated each time a call is made to Shopify. Ex content: "1/500"
+
 Version 0.5
 -----------
 
