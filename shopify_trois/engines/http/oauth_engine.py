@@ -40,11 +40,14 @@ class OAuthEngine():
 
     def __init__(self, shop_name, credentials):
 
+        self.api_call_limit = None
+
         self.credentials = credentials
 
         self.base_url = self._api_base.format(shop_name=shop_name)
 
         self.session = requests.Session()
+
         self.session.headers.update({'Content-Type': self.mime})
 
         if credentials.oauth_access_token:
@@ -154,6 +157,13 @@ signature=6fb122e33c21851c465345b8cb97245e")
 
         return url
 
+    def _update_call_limit(self, response):
+        """Update the api_call_limit value from Shopify's response."""
+
+        header = 'x-shopify-shop-api-call-limit'
+        if header in response.headers:
+            self.api_call_limit = response.headers[header]
+
     def _put(self, req):
         """Perform a PUT request to Shopify.
 
@@ -161,14 +171,16 @@ signature=6fb122e33c21851c465345b8cb97245e")
         """
 
         url = self.url_for_request(req)
-        request = self.session.put(
+        response = self.session.put(
             url,
             params=req.params,
             data=req.data,
             headers=req.headers()
         )
 
-        return request
+        self._update_call_limit(response)
+
+        return response
 
     def _get(self, req):
         """Perform a GET request to Shopify.
@@ -177,12 +189,15 @@ signature=6fb122e33c21851c465345b8cb97245e")
         """
 
         url = self.url_for_request(req)
-        request = self.session.get(
+        response = self.session.get(
             url,
             params=req.params,
             headers=req.headers()
         )
-        return request
+
+        self._update_call_limit(response)
+
+        return response
 
     def _post(self, req):
         """Perform a POST request to Shopify
@@ -190,14 +205,16 @@ signature=6fb122e33c21851c465345b8cb97245e")
         """
 
         url = self.url_for_request(req)
-        request = self.session.post(
+        response = self.session.post(
             url,
             params=req.params,
             data=req.data,
             headers=req.headers()
         )
 
-        return request
+        self._update_call_limit(response)
+
+        return response
 
     def _delete(self, req):
         """Perform a DELETE request to Shopify
@@ -205,11 +222,13 @@ signature=6fb122e33c21851c465345b8cb97245e")
         """
 
         url = self.url_for_request(req)
-        request = self.session.delete(
+        response = self.session.delete(
             url,
             params=req.params,
             data=req.data,
             headers=req.headers()
         )
 
-        return request
+        self._update_call_limit(response)
+
+        return response

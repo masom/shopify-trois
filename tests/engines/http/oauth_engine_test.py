@@ -1,5 +1,7 @@
 from ... import ShopifyTroisTestCase
 
+import requests
+
 from shopify_trois import Credentials
 from shopify_trois.engines.http.oauth_engine import OAuthEngine
 from shopify_trois.engines.http.request import Request
@@ -16,6 +18,27 @@ class OAuthEngineTestCase(ShopifyTroisTestCase):
 
         self.assertEqual(OAuthEngine.extension, "")
         self.assertEqual(OAuthEngine.mime, "")
+
+    def test_update_call_limit(self):
+        encoding = 'UTF-8'
+
+        credentials = Credentials()
+        shopify = OAuthEngine(shop_name='test', credentials=credentials)
+
+        self.assertEqual(shopify.api_call_limit, None)
+
+        data = '{"test_models": [{"id": 1, "name": "test"}]}'
+        response = requests.Response()
+        response.encoding = encoding
+        response._content = data.encode(encoding)
+        response.status_code = 200
+
+        shopify._update_call_limit(response)
+        self.assertEqual(shopify.api_call_limit, None)
+
+        response.headers['x-shopify-shop-api-call-limit'] = "1"
+        shopify._update_call_limit(response)
+        self.assertEqual(shopify.api_call_limit, "1")
 
     def test_oauth_authorize_url(self):
 
