@@ -102,6 +102,42 @@ Some entities have been marked as subresources of another.
     variant = ProductVariant(product_id=2)
     shopify.fetch(variant)
 
+
+Accessing Multiple Shops
+------------------------
+
+Shopify-Trois can easily access multiple shops within
+the same thread.
+
+.. code-block:: python
+
+    from shopify_trois import Credentials
+    from shopify_trois.models import Shop
+    from shopify_trois.engines.http import Json as Shopify
+
+    credentials = {
+        "a-store-name": Credentials(
+            api_key='your-app-key',
+            secret='yout-app-secret',
+            oauth_access_token='access-token',
+            scope=['read_content']
+        ),
+        "another-store-name": Credentials(
+            api_key='your-app-key',
+            secret='your-app-secret',
+            oauth_access_token='access-token',
+            scope=['read_content']
+        )
+    }
+
+    instances = [Shopify(shop_name=k, credentials=v) for k, v in credentials.items()]
+
+    stores = [instance.fetch(Shop) for instance in instances]
+
+    for store in stores:
+        print(store.name)
+
+
 Classes
 ----------
 
