@@ -3,6 +3,14 @@ Shopify-Trois Changelog
 
 Here you can see the full list of changes between each Shopify-Trois release.
 
+Version 0.7
+-----------
+
+Released on July 19th 2013, codename Tobio
+
+- Multi-shop example.
+- Mapped all resources. (Assets are weird, more work needed.)
+
 Version 0.6
 -----------
 
