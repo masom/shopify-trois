@@ -1,4 +1,4 @@
-__version__ = '0.7-dev'
+__version__ = '0.7'
 
 from .collection import Collection
 from .credentials import Credentials
