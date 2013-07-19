@@ -10,7 +10,7 @@ from setuptools import setup
 
 setup(
     name='shopify-trois',
-    version='0.7',
+    version='0.8-dev',
     url='http://masom.github.io/shopify-trois',
     license='MIT',
     author='Martin Samson',
