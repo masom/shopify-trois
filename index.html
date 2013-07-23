@@ -77,7 +77,7 @@
 <span class="p">)</span>
 <span class="n">shopify</span> <span class="o">=</span> <span class="n">Shopify</span><span class="p">(</span><span class="n">shop_name</span><span class="o">=</span><span class="s">&quot;your store name&quot;</span><span class="p">,</span> <span class="n">credentials</span><span class="o">=</span><span class="n">credentials</span><span class="p">)</span>
 
-<span class="c"># Redirect the shop owner to the url provided by `shopify.oauth_authorize_url()`</span>
+<span class="c"># Redirect the shop owner to the URL provided by `shopify.oauth_authorize_url()`</span>
 <span class="c"># print(shopify.oauth_authorize_url())</span>
 <span class="c"># Get the oauth temporary code and set it in the credentials object.</span>
 
@@ -166,7 +166,7 @@ the same thread.</p>
 <span class="n">credentials</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">&quot;a-store-name&quot;</span><span class="p">:</span> <span class="n">Credentials</span><span class="p">(</span>
         <span class="n">api_key</span><span class="o">=</span><span class="s">&#39;your-app-key&#39;</span><span class="p">,</span>
-        <span class="n">secret</span><span class="o">=</span><span class="s">&#39;yout-app-secret&#39;</span><span class="p">,</span>
+        <span class="n">secret</span><span class="o">=</span><span class="s">&#39;your-app-secret&#39;</span><span class="p">,</span>
         <span class="n">oauth_access_token</span><span class="o">=</span><span class="s">&#39;access-token&#39;</span><span class="p">,</span>
         <span class="n">scope</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;read_content&#39;</span><span class="p">]</span>
     <span class="p">),</span>
@@ -192,7 +192,7 @@ the same thread.</p>
 <dl class="class">
 <dt id="shopify_trois.engines.http.json.Json">
 <em class="property">class </em><tt class="descclassname">shopify_trois.engines.http.json.</tt><tt class="descname">Json</tt><big>(</big><em>shop_name</em>, <em>credentials</em>, <em>ignore_supported=False</em>, <em>ignore_model_properties=False</em><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.json.Json" title="Permalink to this definition">¶</a></dt>
-<dd><p>The Json engine implements an http transport using JSON with OAuth
+<dd><p>The Json engine implements an HTTP transport using JSON with OAuth
 authentication.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -296,8 +296,7 @@ exists.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>instance</strong> &#8211; The model instance to remove.</li>
-<li><strong>**params</strong> &#8211; <p>Query parameters.</p>
-</li>
+<li><strong>params</strong> &#8211; Query parameters.</li>
 </ul>
 </td>
 </tr>
@@ -426,7 +425,7 @@ the credential values.</p>
 <dt id="shopify_trois.engines.http.json.Json.sync_access_token">
 <tt class="descname">sync_access_token</tt><big>(</big><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.json.Json.sync_access_token" title="Permalink to this definition">¶</a></dt>
 <dd><p>Utility method to sync the credentials access token with the
-http session.</p>
+HTTP session.</p>
 </dd></dl>
 
 <dl class="method">
