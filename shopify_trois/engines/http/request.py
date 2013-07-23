@@ -16,7 +16,7 @@ class Request:
     """Shopify-Trois request wrapper.
 
     :param model: The model class or instance this request operates on.
-    :param **params: Query parameters.
+    :param params: Query parameters.
     """
 
     def __init__(self, model=None, **params):

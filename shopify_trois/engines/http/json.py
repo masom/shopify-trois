@@ -17,7 +17,7 @@ from shopify_trois.exceptions import ShopifyException, InvalidRequestException
 
 
 class Json(OAuthEngine):
-    """The Json engine implements an http transport using JSON with OAuth
+    """The Json engine implements an HTTP transport using JSON with OAuth
     authentication.
 
     :param shop_name: The name of the shopify store.
@@ -147,7 +147,7 @@ class Json(OAuthEngine):
         exists.
 
         :param instance: The model instance to remove.
-        :param **params: Query parameters.
+        :param params: Query parameters.
 
         example usage::
 

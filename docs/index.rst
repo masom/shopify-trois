@@ -34,7 +34,7 @@ App Authorization
     )
     shopify = Shopify(shop_name="your store name", credentials=credentials)
 
-    # Redirect the shop owner to the url provided by `shopify.oauth_authorize_url()`
+    # Redirect the shop owner to the URL provided by `shopify.oauth_authorize_url()`
     # print(shopify.oauth_authorize_url())
     # Get the oauth temporary code and set it in the credentials object.
 
@@ -133,7 +133,7 @@ the same thread.
     credentials = {
         "a-store-name": Credentials(
             api_key='your-app-key',
-            secret='yout-app-secret',
+            secret='your-app-secret',
             oauth_access_token='access-token',
             scope=['read_content']
         ),

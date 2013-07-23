@@ -85,7 +85,7 @@ The __awesome__ shopify api client for Python 3.3
         print(webhook.to_dict())
 ```
 
-### Flask Quickstart
+### Flask Quick start
 
 ```python
     from flask import (Blueprint, render_template, session, redirect, url_for,

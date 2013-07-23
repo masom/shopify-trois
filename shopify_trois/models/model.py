@@ -31,7 +31,7 @@ class Model():
     #: The model primary key.
     primary_key = "id"
 
-    #: List of properties expoded by the api.
+    #: List of properties exposed by the api.
     properties = []
 
     #: The shopify url resource.

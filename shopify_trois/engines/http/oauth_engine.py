@@ -55,7 +55,7 @@ class OAuthEngine():
 
     def sync_access_token(self):
         """Utility method to sync the credentials access token with the
-        http session.
+        HTTP session.
         """
 
         self.session.headers.update({
