@@ -12,9 +12,7 @@ from .model import Model
 
 
 class Product(Model):
-    """ Product
-    http://docs.shopify.com/api/product
-    """
+    """http://docs.shopify.com/api/product"""
 
     resource = "products"
 

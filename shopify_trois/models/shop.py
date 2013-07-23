@@ -12,9 +12,8 @@ from .model import Model
 
 
 class Shop(Model):
-    """Shop
-    http://docs.shopify.com/api/shop
-    """
+    """http://docs.shopify.com/api/shop"""
+
     resource = "shop"
 
     supported = ["view"]
