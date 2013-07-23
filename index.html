@@ -285,7 +285,7 @@ will be returned.</li>
 
 <dl class="method">
 <dt id="shopify_trois.engines.http.json.Json.delete">
-<tt class="descname">delete</tt><big>(</big><em>instance</em><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.json.Json.delete" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">delete</tt><big>(</big><em>instance</em>, <em>**params</em><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.json.Json.delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete a model instance.</p>
 <p>An InvalidRequestException will be raised if the instance does not yet
 exists.</p>
@@ -293,7 +293,12 @@ exists.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>instance</strong> &#8211; The model instance to remove.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>instance</strong> &#8211; The model instance to remove.</li>
+<li><strong>**params</strong> &#8211; <p>Query parameters.</p>
+</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -414,6 +419,13 @@ instead of returning a json object.</li>
 <tt class="descname">setup_access_token</tt><big>(</big><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.json.Json.setup_access_token" title="Permalink to this definition">¶</a></dt>
 <dd><p>Utility function wrapping getting the oauth token and setting
 the credential values.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="shopify_trois.engines.http.json.Json.sync_access_token">
+<tt class="descname">sync_access_token</tt><big>(</big><big>)</big><a class="headerlink" href="#shopify_trois.engines.http.json.Json.sync_access_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility method to sync the credentials access token with the
+http session.</p>
 </dd></dl>
 
 <dl class="method">
