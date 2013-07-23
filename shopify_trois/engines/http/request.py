@@ -13,6 +13,12 @@ from shopify_trois.exceptions import ShopifyException
 
 
 class Request:
+    """Shopify-Trois request wrapper.
+
+    :param model: The model class or instance this request operates on.
+    :param **params: Query parameters.
+    """
+
     def __init__(self, model=None, **params):
         self.__headers = {}
 
@@ -32,13 +38,21 @@ class Request:
             self.resource = self.generate_resource_for_model(model)
 
     def headers(self, key=None, value=None):
+        """Set request headers.
+
+        :param key: The header name.
+        :param value: The header value.
+        """
+
         if key is None:
             return self.__headers
         else:
             self.__headers[key] = value
 
     def generate_resource_for_model(self, model):
-        '''Generate the relative path of a given model.'''
+        '''Generate the relative path of a given model.
+        :param model: The model or instance this request operates on.
+        '''
 
         is_instance = isinstance(model, Model)
 

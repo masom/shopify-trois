@@ -51,9 +51,16 @@ class OAuthEngine():
         self.session.headers.update({'Content-Type': self.mime})
 
         if credentials.oauth_access_token:
-            self.session.headers.update({
-                'X-Shopify-Access-Token': credentials.oauth_access_token
-            })
+            self.sync_access_token()
+
+    def sync_access_token(self):
+        """Utility method to sync the credentials access token with the
+        http session.
+        """
+
+        self.session.headers.update({
+            'X-Shopify-Access-Token': self.credentials.oauth_access_token
+        })
 
     def oauth_authorize_url(self, redirect_to=None):
         """Generates the oauth authorize url.

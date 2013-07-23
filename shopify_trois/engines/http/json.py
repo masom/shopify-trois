@@ -140,13 +140,14 @@ class Json(OAuthEngine):
 
         raise ShopifyException(res)
 
-    def delete(self, instance):
+    def delete(self, instance, **params):
         """Delete a model instance.
 
         An InvalidRequestException will be raised if the instance does not yet
         exists.
 
         :param instance: The model instance to remove.
+        :param **params: Query parameters.
 
         example usage::
 
@@ -169,6 +170,7 @@ class Json(OAuthEngine):
             raise InvalidRequestException(msg)
 
         req = Request(instance)
+        req.params = params
         res = self._delete(req)
 
         if res.status_code == requests.codes.ok:
@@ -328,10 +330,7 @@ class Json(OAuthEngine):
         oauth_token = self.oauth_access_token()
         self.credentials.code = None
         self.credentials.oauth_access_token = oauth_token
-
-        self.session.headers.update({
-            'X-Shopify-Access-Token': self.credentials.oauth_access_token
-        })
+        self.sync_access_token()
 
     def oauth_access_token(self):
         """Fetch the OAuth access token from shopify.
