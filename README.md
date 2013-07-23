@@ -22,7 +22,7 @@ The __awesome__ shopify api client for Python 3.3
 
     credentials = Credentials(
         api_key='your api key',
-        scope=['read_content', 'create_order'],
+        scope=['read_content', 'write_orders'],
         secret='your api key secret'
     )
     shopify = Shopify(shop_name="your store name", credentials=credentials)
