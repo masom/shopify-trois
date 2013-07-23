@@ -14,6 +14,7 @@ Docs
 
    models
    engines
+   logging
 
 API
 ===
