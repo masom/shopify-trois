@@ -28,7 +28,7 @@ App Authorization
 
     credentials = Credentials(
         api_key='your api key',
-        scope=['create_webhooks'],
+        scope=['read_content', 'write_orders'],
         secret='your api key secret'
     )
     shopify = Shopify(shop_name="your store name", credentials=credentials)
@@ -51,7 +51,7 @@ Client Setup Once Authorized
 
     credentials = Credentials(
         api_key='your api key',
-        scope=['read_orders'],
+        scope=['read_content'],
         secret='your app secret',
         oauth_access_token="your access token"
     )
@@ -76,7 +76,7 @@ Working With Data
     print(shop.changes())
 
     webhook = Webhook()
-    webhook.address = "http://www.google.ca"
+    webhook.address = "http://do-not-copy-this.com"
     webhook.format = "json"
     webhook.topic = "orders/create"
 
@@ -99,9 +99,23 @@ Some entities have been marked as subresources of another.
 
     shopify.index(ProductVariant, parent_id=2)
 
-    variant = ProductVariant(product_id=2)
+    variant = ProductVariant(id=123, product_id=2)
     shopify.fetch(variant)
 
+
+Metafields
+----------
+
+Shopify-Trois exposes metafields as it do for relationships.
+
+Note: The ProductVariant metafield is currently unsupported.
+
+.. code-block:: python
+
+    shopify.index(BlogMetafield, parent_id=234224)
+
+    metafield = BlogMetafield(id=2342, blog_id=3242424)
+    shopify.fetch(metafield)
 
 Accessing Multiple Shops
 ------------------------

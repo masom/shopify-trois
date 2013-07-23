@@ -12,7 +12,7 @@ The __awesome__ shopify api client for Python 3.3
 ### Example Flask Application
 
    [Flask-Trois](https://github.com/masom/flask-trois "Flask-Trois")
-   
+
 ### Authorization
 
 ```python
@@ -22,7 +22,7 @@ The __awesome__ shopify api client for Python 3.3
 
     credentials = Credentials(
         api_key='your api key',
-        scope=['create_webhooks'],
+        scope=['read_content', 'create_order'],
         secret='your api key secret'
     )
     shopify = Shopify(shop_name="your store name", credentials=credentials)
@@ -43,7 +43,7 @@ The __awesome__ shopify api client for Python 3.3
 ```python
     credentials = Credentials(
         api_key='your api key',
-        scope=['read_orders'],
+        scope=['read_content'],
         secret='your app secret',
         oauth_access_token="your access token"
     )
@@ -71,7 +71,7 @@ The __awesome__ shopify api client for Python 3.3
 
 ```python
     webhook = Webhook()
-    webhook.address = "http://www.google.ca"
+    webhook.address = "http://do-not-just-copy-this.com"
     webhook.format = "json"
     webhook.topic = "orders/create"
 
@@ -107,7 +107,7 @@ The __awesome__ shopify api client for Python 3.3
             return redirect(url_for('store.view'))
 
         if request.method == 'POST':
-            
+
             # Get the base app credentials. The SHOPIFY_CREDENTIALS
             # object should be a Credentials instance with the api_key, secret,
             # and scopes set.
