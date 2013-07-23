@@ -18,6 +18,9 @@ class Metafield(Model):
 
     resource = "metafields"
 
+    enclosure = "metafield"
+    """Specifically overloader for the subclasses."""
+
     supported = [
         "count", "create", "delete", "index", "update", "view"
     ]

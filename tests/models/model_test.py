@@ -7,6 +7,10 @@ class TestModel(Model):
     properties = ["id"]
 
 
+class TestModelWithEnclosure(TestModel):
+    enclosure = "weird_underscore_name"
+
+
 class ModelTest(ShopifyTroisTestCase):
     def test_init(self):
         a = Model()
@@ -49,6 +53,10 @@ class ModelTest(ShopifyTroisTestCase):
 
         expected = "test_model"
         result = TestModel.to_underscore_name()
+        self.assertEquals(result, expected)
+
+        expected = "weird_underscore_name"
+        result = TestModelWithEnclosure.to_underscore_name()
         self.assertEquals(result, expected)
 
     def test_update(self):

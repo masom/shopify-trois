@@ -67,6 +67,12 @@ class Model():
 
     @classmethod
     def to_underscore_name(cls):
+        """Underscore the class name."""
+
+        # If an enclosure has been specified, use it.
+        if not cls.enclosure is None:
+            return cls.enclosure
+
         s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', cls.__name__)
         return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
 
