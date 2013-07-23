@@ -110,7 +110,8 @@
 <dl class="classmethod">
 <dt id="shopify_trois.models.model.Model.to_underscore_name">
 <em class="property">classmethod </em><tt class="descname">to_underscore_name</tt><big>(</big><big>)</big><a class="headerlink" href="#shopify_trois.models.model.Model.to_underscore_name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Underscore the class name.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="shopify_trois.models.model.Model.update">
@@ -509,6 +510,11 @@ is passed by parameter...</p>
 <p>MetaField
 <a class="reference external" href="http://docs.shopify.com/api/metafield">http://docs.shopify.com/api/metafield</a></p>
 <dl class="attribute">
+<dt id="shopify_trois.models.Metafield.enclosure">
+<tt class="descname">enclosure</tt><em class="property"> = 'metafield'</em><a class="headerlink" href="#shopify_trois.models.Metafield.enclosure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="shopify_trois.models.Metafield.properties">
 <tt class="descname">properties</tt><em class="property"> = ['created_at', 'description', 'id', 'key', 'namespace', 'owner_id', 'updated_at', 'value', 'value_type', 'owner_resource']</em><a class="headerlink" href="#shopify_trois.models.Metafield.properties" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -609,8 +615,7 @@ is passed by parameter...</p>
 <dt id="shopify_trois.models.Product">
 <em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">Product</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.Product" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
-<p>Product
-<a class="reference external" href="http://docs.shopify.com/api/product">http://docs.shopify.com/api/product</a></p>
+<p><a class="reference external" href="http://docs.shopify.com/api/product">http://docs.shopify.com/api/product</a></p>
 <dl class="attribute">
 <dt id="shopify_trois.models.Product.properties">
 <tt class="descname">properties</tt><em class="property"> = ['body_html', 'created_at', 'handle', 'id', 'product_type', 'published_at', 'published_scope', 'template_suffix', 'title', 'updated_at', 'vendor', 'tags', 'variants', 'options', 'images', 'image']</em><a class="headerlink" href="#shopify_trois.models.Product.properties" title="Permalink to this definition">¶</a></dt>
@@ -819,8 +824,7 @@ is passed by parameter...</p>
 <dt id="shopify_trois.models.Shop">
 <em class="property">class </em><tt class="descclassname">shopify_trois.models.</tt><tt class="descname">Shop</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#shopify_trois.models.Shop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#shopify_trois.models.model.Model" title="shopify_trois.models.model.Model"><tt class="xref py py-class docutils literal"><span class="pre">shopify_trois.models.model.Model</span></tt></a></p>
-<p>Shop
-<a class="reference external" href="http://docs.shopify.com/api/shop">http://docs.shopify.com/api/shop</a></p>
+<p><a class="reference external" href="http://docs.shopify.com/api/shop">http://docs.shopify.com/api/shop</a></p>
 <dl class="attribute">
 <dt id="shopify_trois.models.Shop.properties">
 <tt class="descname">properties</tt><em class="property"> = ['address1', 'city', 'country', 'created_at', 'customer_email', 'currency', 'domain', 'email', 'google_apps_domain', 'google_apps_login_enabled', 'id', 'latitude', 'longitude', 'money_format', 'money_with_currency_format', 'myshopify_domain', 'name', 'plan_name', 'phone', 'province', 'public', 'shop_owner', 'source', 'tax_shipping', 'taxes_included', 'timezone', 'zip']</em><a class="headerlink" href="#shopify_trois.models.Shop.properties" title="Permalink to this definition">¶</a></dt>
