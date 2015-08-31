@@ -9,6 +9,7 @@ from .comment import Comment
 from .country import Country
 from .custom_collection import CustomCollection
 from .customer import Customer
+from .customer_address import CustomerAddress
 from .customer_saved_search import CustomerSavedSearch
 from .event import Event
 from .fulfillment import Fulfillment
