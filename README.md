@@ -1,4 +1,4 @@
-The __awesome__ shopify api client for Python 3.3
+RAD Shopify api client for Python 3.x
 
 [![Build Status](https://travis-ci.org/masom/shopify-trois.png?branch=master)](https://travis-ci.org/masom/shopify-trois)
 
