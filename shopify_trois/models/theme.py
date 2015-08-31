@@ -1,25 +1,26 @@
 # -*- coding: utf-8 -*-
-"""
+'''
     shopify_trois.models.theme
 
     Shopify-Trois Theme
 
-    :copyright: (c) 2013 by Martin Samson
+    :copyright: (c) 2015 by Martin Samson
     :license: MIT, see LICENSE for more details.
-"""
+'''
 
 from .model import Model
 
 
 class Theme(Model):
-    """ Theme
+    ''' Theme
     http://docs.shopify.com/api/theme
-    """
+    '''
 
-    resource = "themes"
+    resource = 'themes'
 
-    supported = ["index", "view", "create", "update", "delete"]
+    supported = ['index', 'view', 'create', 'update', 'delete']
 
     properties = [
-        "created_at", "id", "name", "role", "updated_at", "src"
+        'created_at', 'id', 'name', 'previewable', 'processing', 'role', 'src',
+        'updated_at'
     ]
