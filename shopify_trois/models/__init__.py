@@ -9,10 +9,11 @@ from .comment import Comment
 from .country import Country
 from .custom_collection import CustomCollection
 from .customer import Customer
-from .customer_group import CustomerGroup
+from .customer_saved_search import CustomerSavedSearch
 from .event import Event
 from .fulfillment import Fulfillment
 from .fulfillment_service import FulfillmentService
+from .location import Location
 from .metafield import Metafield
 from .order import Order
 from .order_risk import OrderRisk
@@ -24,7 +25,6 @@ from .product_variant import ProductVariant
 from .province import Province
 from .recurring_application_charge import RecurringApplicationCharge
 from .redirect import Redirect
-from .script_tag import ScriptTag
 from .shop import Shop
 from .smart_collection import SmartCollection
 from .theme import Theme
@@ -32,7 +32,7 @@ from .transaction import Transaction
 from .webhook import Webhook
 
 #
-# One file per class seems overkill for these "aliases"
+# One file per class seems overkill for these 'aliases'
 #
 
 
@@ -69,41 +69,42 @@ class ProductMetafield(Metafield):
 #
 # Boils down to looping the class resource ancestry.
 #
-#class ProductVariantMetafield(Metafield):
-#    is_subresource_of = ProductVariant
+# class ProductVariantMetafield(Metafield):
+#     is_subresource_of = ProductVariant
 
 
 __all__ = [
-    "ApplicationCharge",
-    "Article",
-    "Asset",
-    "Blog",
-    "CarrierService",
-    "Checkout",
-    "Collect",
-    "Comment",
-    "Country",
-    "CustomCollection",
-    "Customer",
-    "CustomerGroup",
-    "Event",
-    "Fulfillment",
-    "FulfillmentService",
-    "Metafield",
-    "Order",
-    "OrderRisk",
-    "Page",
-    "Product",
-    "ProductImage",
-    "ProductSearchEngine",
-    "ProductVariant",
-    "Province",
-    "RecurringApplicationCharge",
-    "Redirect",
-    "ScriptTag",
-    "Shop",
-    "SmartCollection",
-    "Theme",
-    "Transaction",
-    "Webhook"
+    'ApplicationCharge',
+    'Article',
+    'Asset',
+    'Blog',
+    'CarrierService',
+    'Checkout',
+    'Collect',
+    'Comment',
+    'Country',
+    'CustomCollection',
+    'Customer',
+    'CustomerAddress',
+    'CustomerSavedSearch',
+    'Event',
+    'Fulfillment',
+    'FulfillmentService',
+    'Location',
+    'Metafield',
+    'Order',
+    'OrderRisk',
+    'Page',
+    'Product',
+    'ProductImage',
+    'ProductSearchEngine',
+    'ProductVariant',
+    'Province',
+    'RecurringApplicationCharge',
+    'Redirect',
+    'Shop',
+    'SmartCollection',
+    'Theme',
+    'Transaction',
+    'Webhook'
 ]

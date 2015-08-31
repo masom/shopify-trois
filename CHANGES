@@ -3,6 +3,14 @@ Shopify-Trois Changelog
 
 Here you can see the full list of changes between each Shopify-Trois release.
 
+Version 1.1
+-----------
+
+Released on ,
+
+- Updated to current Shopify API
+- Supports python 3.4
+
 Version 1.0
 -----------
 

@@ -1,12 +1,12 @@
 language: python
 
 python:
+  - "3.4"
   - "3.3"
   - "3.2"
 
 install:
   - pip install . --quiet
-  - pip install git+https://github.com/kennethreitz/requests
   - pip install pytest nose --quiet
 
 script: nosetests

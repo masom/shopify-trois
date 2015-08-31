@@ -1,23 +1,25 @@
 # -*- coding: utf-8 -*-
-"""
-    shopify_trois.credentials
+'''
+    shopify_trois.models.model
 
-    Shopify-Trois Credentials
+    Shopify-Trois Model
 
-    :copyright: (c) 2013 by Martin Samson
+    :copyright: (c) 2015 by Martin Samson
     :license: MIT, see LICENSE for more details.
-"""
+'''
 
 import re
 
 
 class Meta():
+    '''Holds model instance metadata'''
+
     def __init__(self):
         self.exists = False
 
 
 class Model():
-    """Base model class for all Shopify resources."""
+    '''Base model class for all Shopify resources.'''
 
     #: Holds the data enclosure name if not normalized.
     enclosure = None
@@ -29,7 +31,7 @@ class Model():
     parent_id = None
 
     #: The model primary key.
-    primary_key = "id"
+    primary_key = 'id'
 
     #: List of properties exposed by the api.
     properties = []
@@ -54,12 +56,12 @@ class Model():
             self._meta__.exists = True
 
     def exists(self):
-        """Determine if the instance has been persisted."""
+        '''Determine if the instance has been persisted.'''
 
         return self._meta__.exists
 
     def to_dict(self):
-        """Returns the instance as a dictionary."""
+        '''Returns the instance as a dictionary.'''
 
         data = dict(self.__dict__)
         del(data['_meta__'])
@@ -67,27 +69,27 @@ class Model():
 
     @classmethod
     def to_underscore_name(cls):
-        """Underscore the class name."""
+        '''Underscore the class name.'''
 
         # If an enclosure has been specified, use it.
-        if not cls.enclosure is None:
+        if cls.enclosure is not None:
             return cls.enclosure
 
         s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', cls.__name__)
         return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
 
     def update(self, data, ignore_properties=False):
-        """Update the instance with the provided data.
+        '''Update the instance with the provided data.
 
         :param data: Properties to update.
         :param ignore_properties: Only update known properties when set
                                   to false
-        """
+        '''
 
         entity_name = self.to_underscore_name()
 
-        if not entity_name in data:
-            msg = "The data set does not contain `%s`"
+        if entity_name not in data:
+            msg = 'The data set does not contain `%s`'
             raise KeyError(msg % entity_name)
 
         raw = data[entity_name]
@@ -102,10 +104,10 @@ class Model():
                 setattr(self, k, v)
 
     def changes(self):
-        """Returns a dictionary of attributes that have changed.
+        '''Returns a dictionary of attributes that have changed.
 
         http://stackoverflow.com/a/111364/1014879
-        """
+        '''
 
         missing = object()
         result = {}

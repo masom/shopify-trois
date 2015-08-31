@@ -1,28 +1,29 @@
 # -*- coding: utf-8 -*-
-"""
+'''
     shopify_trois.models.product_image
 
     Shopify-Trois ProductImage
 
     :copyright: (c) 2013 by Martin Samson
     :license: MIT, see LICENSE for more details.
-"""
+'''
 
 from .model import Model
 from .product import Product
 
 
 class ProductImage(Model):
-    """ ProductImage
+    ''' ProductImage
     http://docs.shopify.com/api/productimage
-    """
+    '''
 
-    resource = "images"
+    resource = 'images'
     is_subresource_of = Product
-    enclosure = "image"
+    enclosure = 'image'
 
-    supported = ["index", "view", "create", "delete"]
+    supported = ['index', 'view', 'create', 'delete']
 
     properties = [
-        "created_at", "id", "position", "product_id", "updated_at", "src"
+        'created_at', 'id', 'position', 'product_id', 'updated_at',
+        'variant_ids', 'src'
     ]

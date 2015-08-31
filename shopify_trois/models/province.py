@@ -1,27 +1,27 @@
 # -*- coding: utf-8 -*-
-"""
+'''
     shopify_trois.models.province
 
     Shopify-Trois Province
 
     :copyright: (c) 2013 by Martin Samson
     :license: MIT, see LICENSE for more details.
-"""
+'''
 
 from .model import Model
 from .country import Country
 
 
 class Province(Model):
-    """http://docs.shopify.com/api/province"""
+    '''http://docs.shopify.com/api/province'''
 
-    resource = "provinces"
+    resource = 'provinces'
 
     is_subresource_of = Country
 
-    supported = ["index", "view", "count", "update"]
+    supported = ['index', 'view', 'count', 'update']
 
     properties = [
-        "code", "country_id", "id", "name", "tax", "tax_name", "tax_type",
-        "tax_percentage"
+        'code', 'country_id', 'id', 'name', 'tax', 'tax_name', 'tax_type',
+        'tax_percentage'
     ]
