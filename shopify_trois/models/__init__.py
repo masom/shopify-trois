@@ -21,7 +21,6 @@ from .order_risk import OrderRisk
 from .page import Page
 from .product import Product
 from .product_image import ProductImage
-from .product_search_engine import ProductSearchEngine
 from .product_variant import ProductVariant
 from .province import Province
 from .recurring_application_charge import RecurringApplicationCharge
@@ -98,7 +97,6 @@ __all__ = [
     'Page',
     'Product',
     'ProductImage',
-    'ProductSearchEngine',
     'ProductVariant',
     'Province',
     'RecurringApplicationCharge',
