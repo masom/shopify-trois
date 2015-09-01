@@ -4,7 +4,7 @@
 
     Shopify-Trois Fulfillment
 
-    :copyright: (c) 2015 by Martin Samson
+    :copyright: (c) 2015 Martin Samson
     :license: MIT, see LICENSE for more details.
 '''
 
