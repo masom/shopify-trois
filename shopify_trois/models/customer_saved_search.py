@@ -4,7 +4,7 @@
 
     Shopify-Trois CustomerSavedSearch
 
-    :copyright: (c) 2015 by Martin Samson
+    :copyright: (c) 2015 Martin Samson
     :license: MIT, see LICENSE for more details.
 '''
 
